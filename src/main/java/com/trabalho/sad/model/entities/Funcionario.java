@@ -12,6 +12,10 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "funcionario")
 public class Funcionario {
+
+    // COMENTÁRIO
+
+    // SEGUNDO COMENTARIO
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
