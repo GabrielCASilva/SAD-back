@@ -14,6 +14,8 @@ import jakarta.persistence.Table;
 public class Funcionario {
 
     // COMENTÁRIO
+
+    // SEGUNDO COMENTARIO
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
