@@ -13,6 +13,7 @@ import jakarta.persistence.Table;
 @Table(name = "funcionario")
 public class Funcionario {
     // COMENTÁRIO TESTE-2
+    // COMENTÁRIO TESTE-3
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
