@@ -46,7 +46,8 @@ public class Cargo {
 	@Column(name = "permitidoProgredirTarefa", nullable = false)
 	private boolean permitidoProgredirTarefa;
 
-	
+	/* Construtor 
+	 ***************************************************************************************************/
 	public Cargo(Long id, String nome, String tipoAvaliacao, boolean permitidoManterMeta,
 			boolean permitidoAvaliacaoServidor, boolean permitidoAvaliacaoSupervisor,
 			boolean permitidoManterFuncionario, boolean permitidoManterSetor, boolean permitidoManterTarefa,
@@ -65,7 +66,8 @@ public class Cargo {
 		this.permitidoProgredirTarefa = permitidoProgredirTarefa;
 	}
 
-	
+	/* Getters e Setters 
+	 ***************************************************************************************************/
 	public Long getId() {
 		return id;
 	}

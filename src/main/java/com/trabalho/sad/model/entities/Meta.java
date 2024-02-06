@@ -33,12 +33,19 @@ public class Meta {
 	@Column(name = "dataConclusao")
 	private LocalDate dataConclusao;
 	
-	@Column(name = "situacao", nullable = false)
-	private String situacao;
+	@Column(name = "idFuncionario", nullable = false)
+	private Long idFuncionario;
 	
+	@Column(name = "idSetor", nullable = false)
+	private Long idSetor;
+	
+	@Column(name = "idSituacaoServico", nullable = false)
+	private Long idSituacaoServico;
 
+	/* Construtor 
+	 ***************************************************************************************************/
 	public Meta(Long id, String nome, String descricao, LocalDate dataCriacao, LocalDate dataPrevistaConclusao,
-			LocalDate dataConclusao, String situacao) {
+			LocalDate dataConclusao, Long idFuncionario, Long idSetor, Long idSituacaoServico) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -46,10 +53,13 @@ public class Meta {
 		this.dataCriacao = dataCriacao;
 		this.dataPrevistaConclusao = dataPrevistaConclusao;
 		this.dataConclusao = dataConclusao;
-		this.situacao = situacao;
+		this.idFuncionario = idFuncionario;
+		this.idSetor = idSetor;
+		this.idSituacaoServico = idSituacaoServico;
 	}
 
-	
+	/* Getters e Setters 
+	 ***************************************************************************************************/
 	public Long getId() {
 		return id;
 	}
@@ -98,12 +108,34 @@ public class Meta {
 		this.dataConclusao = dataConclusao;
 	}
 
-	public String getSituacao() {
-		return situacao;
+
+	public Long getIdFuncionario() {
+		return idFuncionario;
 	}
 
-	public void setSituacao(String situacao) {
-		this.situacao = situacao;
+
+	public void setIdFuncionario(Long idFuncionario) {
+		this.idFuncionario = idFuncionario;
+	}
+
+
+	public Long getIdSetor() {
+		return idSetor;
+	}
+
+
+	public void setIdSetor(Long idSetor) {
+		this.idSetor = idSetor;
+	}
+
+
+	public Long getIdSituacaoServico() {
+		return idSituacaoServico;
+	}
+
+
+	public void setIdSituacaoServico(Long idSituacaoServico) {
+		this.idSituacaoServico = idSituacaoServico;
 	}
 
 }

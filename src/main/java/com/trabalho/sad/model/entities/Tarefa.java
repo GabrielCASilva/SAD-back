@@ -39,12 +39,23 @@ public class Tarefa {
 	@Column(name = "taxaProgresso", nullable = false)
 	private double taxaProgresso;
 	
-	@Column(name = "situacao", nullable = false)
-	private String situacao;
-
+	@Column(name = "idFuncionarioAlocado", nullable = false)
+	private Long idFuncionarioAlocado;
 	
+	@Column(name = "idMeta", nullable = false)
+	private Long idMeta;
+
+	@Column(name = "idSituacaoSetor", nullable = false)
+	private Long idSituacaoSetor;
+	
+	@Column(name = "idFuncionarioResponsavel", nullable = false)
+	private Long idFuncionarioResponsavel;
+	
+	/* Construtor 
+	 ***************************************************************************************************/
 	public Tarefa(Long id, String nome, String descricao, LocalDate dataCriacao, LocalDate dataPrevistaConclusao,
-			LocalDate dataInicio, LocalDate dataConclusao, double taxaProgresso, String situacao) {
+			LocalDate dataInicio, LocalDate dataConclusao, double taxaProgresso, Long idFuncionarioAlocado, Long idMeta,
+			Long idSituacaoSetor, Long idFuncionarioResponsavel) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -54,10 +65,14 @@ public class Tarefa {
 		this.dataInicio = dataInicio;
 		this.dataConclusao = dataConclusao;
 		this.taxaProgresso = taxaProgresso;
-		this.situacao = situacao;
+		this.idFuncionarioAlocado = idFuncionarioAlocado;
+		this.idMeta = idMeta;
+		this.idSituacaoSetor = idSituacaoSetor;
+		this.idFuncionarioResponsavel = idFuncionarioResponsavel;
 	}
 
-
+	/* Getters e Setters 
+	 ***************************************************************************************************/
 	public Long getId() {
 		return id;
 	}
@@ -138,14 +153,43 @@ public class Tarefa {
 	}
 
 
-	public String getSituacao() {
-		return situacao;
+	public Long getIdFuncionarioAlocado() {
+		return idFuncionarioAlocado;
 	}
 
 
-	public void setSituacao(String situacao) {
-		this.situacao = situacao;
+	public void setIdFuncionarioAlocado(Long idFuncionarioAlocado) {
+		this.idFuncionarioAlocado = idFuncionarioAlocado;
 	}
-	
-	
+
+
+	public Long getIdMeta() {
+		return idMeta;
+	}
+
+
+	public void setIdMeta(Long idMeta) {
+		this.idMeta = idMeta;
+	}
+
+
+	public Long getIdSituacaoSetor() {
+		return idSituacaoSetor;
+	}
+
+
+	public void setIdSituacaoSetor(Long idSituacaoSetor) {
+		this.idSituacaoSetor = idSituacaoSetor;
+	}
+
+
+	public Long getIdFuncionarioResponsavel() {
+		return idFuncionarioResponsavel;
+	}
+
+
+	public void setIdFuncionarioResponsavel(Long idFuncionarioResponsavel) {
+		this.idFuncionarioResponsavel = idFuncionarioResponsavel;
+	}
+
 }

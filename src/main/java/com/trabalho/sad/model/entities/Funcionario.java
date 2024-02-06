@@ -39,6 +39,7 @@ public class Funcionario {
 	@Column(name = "telefone", nullable = false)
 	private Long telefone;
 	
+	//TODO
 	//@Column(name = "foto", nullable = false)
 	//private String foto;
 	
@@ -48,18 +49,26 @@ public class Funcionario {
 	@Column(name = "dataCadastro", nullable = false)
 	private LocalDate dataCadastro;
 	
-	@Column(name = "situacao", nullable = false)
-	private String situacao;
-	
 	@Column(name = "login", nullable = false)
 	private String login;
 	
 	@Column(name = "senhaHash", nullable = false)
 	private String senhaHash;
-
 	
+	@Column(name = "idCargo", nullable = false)
+	private Long idCargo;
+	
+	@Column(name = "idSetor", nullable = false)
+	private Long idSetor;
+	
+	@Column(name = "idSituacaoFuncionario", nullable = false)
+	private Long idSituacaoFuncionario;
+
+	/* Construtor 
+	 ***************************************************************************************************/
 	public Funcionario(Long id, String nome, LocalDate dataNascimento, char sexo, Long cpf, Long cep, String endereco,
-			Long telefone, String email, LocalDate dataCadastro, String situacao, String login, String senhaHash) {
+			Long telefone, String email, LocalDate dataCadastro, String login, String senhaHash, Long idCargo,
+			Long idSetor, Long idSituacaoFuncionario) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -71,12 +80,16 @@ public class Funcionario {
 		this.telefone = telefone;
 		this.email = email;
 		this.dataCadastro = dataCadastro;
-		this.situacao = situacao;
 		this.login = login;
 		this.senhaHash = senhaHash;
+		this.idCargo = idCargo;
+		this.idSetor = idSetor;
+		this.idSituacaoFuncionario = idSituacaoFuncionario;
 	}
 
 
+	/* Getters e Setters 
+	 ***************************************************************************************************/
 	public Long getId() {
 		return id;
 	}
@@ -176,17 +189,6 @@ public class Funcionario {
 		this.dataCadastro = dataCadastro;
 	}
 
-
-	public String getSituacao() {
-		return situacao;
-	}
-
-
-	public void setSituacao(String situacao) {
-		this.situacao = situacao;
-	}
-
-
 	public String getLogin() {
 		return login;
 	}
@@ -204,6 +206,36 @@ public class Funcionario {
 
 	public void setSenhaHash(String senhaHash) {
 		this.senhaHash = senhaHash;
+	}
+
+
+	public Long getIdCargo() {
+		return idCargo;
+	}
+
+
+	public void setIdCargo(Long idCargo) {
+		this.idCargo = idCargo;
+	}
+
+
+	public Long getIdSetor() {
+		return idSetor;
+	}
+
+
+	public void setIdSetor(Long idSetor) {
+		this.idSetor = idSetor;
+	}
+
+
+	public Long getIdSituacaoFuncionario() {
+		return idSituacaoFuncionario;
+	}
+
+
+	public void setIdSituacaoFuncionario(Long idSituacaoFuncionario) {
+		this.idSituacaoFuncionario = idSituacaoFuncionario;
 	}
 	
 }

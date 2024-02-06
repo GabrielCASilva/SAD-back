@@ -8,35 +8,27 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "setor")
-public class Setor {
+@Table(name = "situacaofuncionario")
+public class SituacaoFuncionario {
 	
 	@Id
-	@Column(name = "id")
+	@Column(name = "id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name = "nome", nullable = false)
 	private String nome;
 	
-	@Column(name = "localizacao", nullable = false)
-	private String localizacao;
-	
-	@Column(name = "ramal", nullable = false)
-	private Long ramal;
-	
-	@Column(name = "idFuncionario", nullable = false)
-	private Long idFuncionario;
+	@Column(name = "descricao", nullable = false)
+	private String descricao;
 
 	/* Construtor 
 	 ***************************************************************************************************/
-	public Setor(Long id, String nome, String localizacao, Long ramal, Long idFuncionario) {
+	public SituacaoFuncionario(Long id, String nome, String descricao) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.localizacao = localizacao;
-		this.ramal = ramal;
-		this.idFuncionario = idFuncionario;
+		this.descricao = descricao;
 	}
 
 	/* Getters e Setters 
@@ -61,33 +53,13 @@ public class Setor {
 	}
 
 
-	public String getLocalizacao() {
-		return localizacao;
+	public String getDescricao() {
+		return descricao;
 	}
 
 
-	public void setLocalizacao(String localizacao) {
-		this.localizacao = localizacao;
-	}
-
-
-	public Long getRamal() {
-		return ramal;
-	}
-
-
-	public void setRamal(Long ramal) {
-		this.ramal = ramal;
-	}
-
-
-	public Long getIdFuncionario() {
-		return idFuncionario;
-	}
-
-
-	public void setIdFuncionario(Long idFuncionario) {
-		this.idFuncionario = idFuncionario;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 	
 }
