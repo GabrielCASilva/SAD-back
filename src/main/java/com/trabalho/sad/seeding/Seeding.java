@@ -54,18 +54,24 @@ public class Seeding implements CommandLineRunner{
 		
 		Cargo c1 = new Cargo("Presidente", "xxxxx", true, true, true, true, true, true, true, true);
 		Cargo c2 = new Cargo("Diretor", "xxxxx", true, true, true, true, true, true, true, true);
-		Cargo c3 = new Cargo("Coordenador", "xxxxx", true, true, true, true, true, true, true, true);
-		Cargo c4 = new Cargo("Serviço Geral", "xxxxx", true, true, true, true, true, true, true, true);
-		Cargo c5 = new Cargo("Segurança", "xxxxx", true, true, true, true, true, true, true, true);
-		cargoRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5));
+		Cargo c3 = new Cargo("Supervisor", "xxxxx", true, true, true, true, true, true, true, true);
+		Cargo c4 = new Cargo("Pesquisador", "xxxxx", true, true, true, true, true, true, true, true);
+		Cargo c5 = new Cargo("Tecnologista", "xxxxx", true, true, true, true, true, true, true, true);
+		Cargo c6 = new Cargo("Técnico", "xxxxx", true, true, true, true, true, true, true, true);
+		Cargo c7 = new Cargo("Auxiliar Técnico", "xxxxx", true, true, true, true, true, true, true, true);
+		Cargo c8 = new Cargo("Analista em Ciência e Tecnologia", "xxxxx", true, true, true, true, true, true, true, true);
+		Cargo c9 = new Cargo("Assistência em Ciência e Tecnologia", "xxxxx", true, true, true, true, true, true, true, true);
+		Cargo c10 = new Cargo("Auxiliar em Ciência e Tecnologia", "xxxxx", true, true, true, true, true, true, true, true);
+		
+		cargoRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5, c6, c7, c8, c9, c10));
 		
 		
 		Funcionario f1 = new Funcionario("Carlos Red", Instant.parse("2001-10-17T01:50:00Z"), 'M', 11586547891L, Status.PRESIDENTE, s01, c1);
-		Funcionario f2 = new Funcionario("Pedro Blue", Instant.parse("2001-10-17T01:50:00Z"), 'M', 11586547891L, Status.DIRETOR, s02, c2);
-		Funcionario f3 = new Funcionario("Maria Brow", Instant.parse("2004-06-24T19:45:00Z"), 'F', 25685232471L, Status.COORDENADOR, s06, c3);	
-		Funcionario f4 = new Funcionario("João Blanc", Instant.parse("2001-02-16T17:30:00Z"), 'M', 25485211614L, Status.SERVIDOR,s07, c4 );
-		Funcionario f5 = new Funcionario("José Yellow", Instant.parse("2001-02-16T17:30:00Z"), 'M', 25485211614L, Status.SERVIDOR,s07, c4 );
-		Funcionario f6 = new Funcionario("Gorete Green", Instant.parse("2002-04-18T16:30:00Z"), 'F', 36856474112L, Status.DIRETOR, s11, c1);
+		Funcionario f2 = new Funcionario("Pedro Blue", Instant.parse("2001-10-17T01:50:00Z"), 'M', 11586547891L, Status.DIRETOR, s05, c2);
+		Funcionario f3 = new Funcionario("Maria Brow", Instant.parse("2004-06-24T19:45:00Z"), 'F', 25685232471L, Status.SUPERVISOR, s05, c3);	
+		Funcionario f4 = new Funcionario("João Blanc", Instant.parse("2001-02-16T17:30:00Z"), 'M', 25485211614L, Status.SERVIDOR,s05, c8 );
+		Funcionario f5 = new Funcionario("José Yellow", Instant.parse("2001-02-16T17:30:00Z"), 'M', 25485211614L, Status.SERVIDOR,s05, c9 );
+		Funcionario f6 = new Funcionario("Gorete Green", Instant.parse("2002-04-18T16:30:00Z"), 'F', 36856474112L, Status.DIRETOR, s11, c2);
 		
 		funcionarioRepository.saveAll(Arrays.asList(f1, f2, f3, f4, f5, f6));	
 	}

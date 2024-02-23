@@ -4,7 +4,7 @@ public enum Status {
 
 	PRESIDENTE(1),
 	DIRETOR(2),
-	COORDENADOR(3),
+	SUPERVISOR(3),
 	SERVIDOR(4);
 
 	
