@@ -7,12 +7,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tarefa")
 public class Tarefa {
 	
+	/* Atributos 
+	 ***************************************************************************************************/
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,23 +43,28 @@ public class Tarefa {
 	@Column(name = "taxaProgresso", nullable = false)
 	private double taxaProgresso;
 	
-	@Column(name = "idFuncionarioAlocado", nullable = false)
-	private Long idFuncionarioAlocado;
+	@Column(name = "situacao", nullable=false)
+	private String situacao;
 	
-	@Column(name = "idMeta", nullable = false)
-	private Long idMeta;
-
-	@Column(name = "idSituacaoSetor", nullable = false)
-	private Long idSituacaoSetor;
+	/* Atributos - Mapping
+	 ***************************************************************************************************/
+	@ManyToOne
+	@JoinColumn(name = "meta_id", nullable=false)
+	private Meta meta;
 	
-	@Column(name = "idFuncionarioResponsavel", nullable = false)
-	private Long idFuncionarioResponsavel;
+	@ManyToOne
+	@JoinColumn(name = "funcionarioAlocado_id")
+	private Funcionario funcionarioAlocado;
+	
+	@ManyToOne
+	@JoinColumn(name = "funcionarioResponsavel_id", nullable = false)
+	private Funcionario funcionarioResponsavel;
+	
 	
 	/* Construtor 
 	 ***************************************************************************************************/
 	public Tarefa(Long id, String nome, String descricao, LocalDate dataCriacao, LocalDate dataPrevistaConclusao,
-			LocalDate dataInicio, LocalDate dataConclusao, double taxaProgresso, Long idFuncionarioAlocado, Long idMeta,
-			Long idSituacaoSetor, Long idFuncionarioResponsavel) {
+			LocalDate dataInicio, LocalDate dataConclusao, double taxaProgresso, String situacao) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -65,10 +74,11 @@ public class Tarefa {
 		this.dataInicio = dataInicio;
 		this.dataConclusao = dataConclusao;
 		this.taxaProgresso = taxaProgresso;
-		this.idFuncionarioAlocado = idFuncionarioAlocado;
-		this.idMeta = idMeta;
-		this.idSituacaoSetor = idSituacaoSetor;
-		this.idFuncionarioResponsavel = idFuncionarioResponsavel;
+		this.situacao = situacao;
+	}
+	
+	public Tarefa() {
+		super();
 	}
 
 	/* Getters e Setters 
@@ -152,44 +162,24 @@ public class Tarefa {
 		this.taxaProgresso = taxaProgresso;
 	}
 
-
-	public Long getIdFuncionarioAlocado() {
-		return idFuncionarioAlocado;
+	public String getSituacao() {
+		return situacao;
 	}
 
-
-	public void setIdFuncionarioAlocado(Long idFuncionarioAlocado) {
-		this.idFuncionarioAlocado = idFuncionarioAlocado;
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
 	}
 
-
-	public Long getIdMeta() {
-		return idMeta;
+	public Meta getMeta() {
+		return meta;
 	}
 
-
-	public void setIdMeta(Long idMeta) {
-		this.idMeta = idMeta;
+	public Funcionario getFuncionarioAlocado() {
+		return funcionarioAlocado;
 	}
 
-
-	public Long getIdSituacaoSetor() {
-		return idSituacaoSetor;
-	}
-
-
-	public void setIdSituacaoSetor(Long idSituacaoSetor) {
-		this.idSituacaoSetor = idSituacaoSetor;
-	}
-
-
-	public Long getIdFuncionarioResponsavel() {
-		return idFuncionarioResponsavel;
-	}
-
-
-	public void setIdFuncionarioResponsavel(Long idFuncionarioResponsavel) {
-		this.idFuncionarioResponsavel = idFuncionarioResponsavel;
+	public Funcionario getFuncionarioResponsavel() {
+		return funcionarioResponsavel;
 	}
 
 }

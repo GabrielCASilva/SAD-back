@@ -2,6 +2,7 @@ package com.trabalho.sad.service.impl;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -61,6 +62,12 @@ public class CargoServiceImpl implements CargoService{
 		Objects.requireNonNull(cargoParamFiltro.getId());
 		Example<Cargo> exampleCargo = Example.of(cargoParamFiltro);
 		return cargoRepository.findAll(exampleCargo);
+	}
+
+	@Override
+	@Transactional
+	public Optional<Cargo> consultarPorId(Long id) {
+		return cargoRepository.findById(id);
 	}
 
 }
