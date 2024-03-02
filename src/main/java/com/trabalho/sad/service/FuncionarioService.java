@@ -1,6 +1,7 @@
 package com.trabalho.sad.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.trabalho.sad.model.entities.Funcionario;
 
@@ -13,5 +14,7 @@ public interface FuncionarioService {
 	Funcionario inativar(Funcionario funcionarioParam);
 	
 	List<Funcionario> buscar(Funcionario funcionarioParam);
+	
+	Optional<Funcionario> consultarPorId(Long id);
 
 }

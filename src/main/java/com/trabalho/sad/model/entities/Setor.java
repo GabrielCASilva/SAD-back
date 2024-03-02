@@ -1,16 +1,24 @@
 package com.trabalho.sad.model.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "setor")
 public class Setor {
 	
+	/* Atributos 
+	 ***************************************************************************************************/
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,18 +33,31 @@ public class Setor {
 	@Column(name = "ramal", nullable = false)
 	private Long ramal;
 	
-	@Column(name = "idFuncionario", nullable = false)
-	private Long idFuncionario;
+	/* Atributos - Mapping
+	 ***************************************************************************************************/
+	@OneToMany(mappedBy = "setorParticipa")
+	private List<Funcionario> funcionarios = new ArrayList<>();
+	
+	@OneToOne
+	@JoinColumn(name="supervisor_id", referencedColumnName = "id")
+	private Funcionario supervisor;
+	
+	@OneToMany(mappedBy = "setor")
+	private List<Meta> metas  = new ArrayList<>();
+	
 
 	/* Construtor 
 	 ***************************************************************************************************/
-	public Setor(Long id, String nome, String localizacao, Long ramal, Long idFuncionario) {
+	public Setor(Long id, String nome, String localizacao, Long ramal) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.localizacao = localizacao;
 		this.ramal = ramal;
-		this.idFuncionario = idFuncionario;
+	}
+	
+	public Setor() {
+		super();
 	}
 
 	/* Getters e Setters 
@@ -80,14 +101,16 @@ public class Setor {
 		this.ramal = ramal;
 	}
 
-
-	public Long getIdFuncionario() {
-		return idFuncionario;
+	public List<Funcionario> getFuncionarios() {
+		return funcionarios;
 	}
 
+	public Funcionario getSupervisor() {
+		return supervisor;
+	}
 
-	public void setIdFuncionario(Long idFuncionario) {
-		this.idFuncionario = idFuncionario;
+	public List<Meta> getMetas() {
+		return metas;
 	}
 	
 }

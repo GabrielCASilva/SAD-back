@@ -1,18 +1,26 @@
 package com.trabalho.sad.model.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "funcionario")
 public class Funcionario {
 	
+	/* Atributos 
+	 ***************************************************************************************************/
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,9 +47,8 @@ public class Funcionario {
 	@Column(name = "telefone", nullable = false)
 	private Long telefone;
 	
-	//TODO
-	//@Column(name = "foto", nullable = false)
-	//private String foto;
+	@Column(name = "foto")
+	private String foto;
 	
 	@Column(name = "email", nullable = false)
 	private String email;
@@ -55,20 +62,37 @@ public class Funcionario {
 	@Column(name = "senhaHash", nullable = false)
 	private String senhaHash;
 	
-	@Column(name = "idCargo", nullable = false)
-	private Long idCargo;
+	@Column(name = "situacao", nullable=false)
+	private String situacao;
 	
-	@Column(name = "idSetor", nullable = false)
-	private Long idSetor;
+	/* Atributos - Mapping
+	 ***************************************************************************************************/
+	@ManyToOne
+	@JoinColumn(name = "cargo_id", nullable=false)
+	private Cargo cargo;
 	
-	@Column(name = "idSituacaoFuncionario", nullable = false)
-	private Long idSituacaoFuncionario;
+	@ManyToOne
+	@JoinColumn(name = "setorParticipa_id")
+	private Setor setorParticipa;
+	
+	@OneToOne(mappedBy = "supervisor")
+	private Setor setorSupervisionado;
+	
+	@OneToMany(mappedBy = "responsavel")
+	private List<Meta> metasResponsavel = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "funcionarioAlocado")
+	private List<Tarefa> tarefasAlocado = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "funcionarioResponsavel")
+	private List<Tarefa> tarefasResponsavel = new ArrayList<>();
 
+	
 	/* Construtor 
 	 ***************************************************************************************************/
 	public Funcionario(Long id, String nome, LocalDate dataNascimento, char sexo, Long cpf, Long cep, String endereco,
-			Long telefone, String email, LocalDate dataCadastro, String login, String senhaHash, Long idCargo,
-			Long idSetor, Long idSituacaoFuncionario) {
+			Long telefone, String foto, String email, LocalDate dataCadastro, String login, String senhaHash, 
+			String situacao) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -78,15 +102,17 @@ public class Funcionario {
 		this.cep = cep;
 		this.endereco = endereco;
 		this.telefone = telefone;
+		this.foto = foto;
 		this.email = email;
 		this.dataCadastro = dataCadastro;
 		this.login = login;
 		this.senhaHash = senhaHash;
-		this.idCargo = idCargo;
-		this.idSetor = idSetor;
-		this.idSituacaoFuncionario = idSituacaoFuncionario;
+		this.situacao = situacao;
 	}
 
+	public Funcionario() {
+		super();
+	}
 
 	/* Getters e Setters 
 	 ***************************************************************************************************/
@@ -170,6 +196,14 @@ public class Funcionario {
 	}
 
 
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -208,34 +242,36 @@ public class Funcionario {
 		this.senhaHash = senhaHash;
 	}
 
-
-	public Long getIdCargo() {
-		return idCargo;
+	public String getSituacao() {
+		return situacao;
 	}
 
-
-	public void setIdCargo(Long idCargo) {
-		this.idCargo = idCargo;
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
 	}
 
-
-	public Long getIdSetor() {
-		return idSetor;
+	public Cargo getCargo() {
+		return cargo;
 	}
 
-
-	public void setIdSetor(Long idSetor) {
-		this.idSetor = idSetor;
+	public Setor getSetorParticipa() {
+		return setorParticipa;
 	}
 
-
-	public Long getIdSituacaoFuncionario() {
-		return idSituacaoFuncionario;
+	public Setor getSetorSupervisionado() {
+		return setorSupervisionado;
 	}
 
+	public List<Meta> getMetasResponsavel() {
+		return metasResponsavel;
+	}
 
-	public void setIdSituacaoFuncionario(Long idSituacaoFuncionario) {
-		this.idSituacaoFuncionario = idSituacaoFuncionario;
+	public List<Tarefa> getTarefasAlocado() {
+		return tarefasAlocado;
+	}
+
+	public List<Tarefa> getTarefasResponsavel() {
+		return tarefasResponsavel;
 	}
 	
 }

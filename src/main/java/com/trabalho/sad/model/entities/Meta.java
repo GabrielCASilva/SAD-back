@@ -1,18 +1,25 @@
 package com.trabalho.sad.model.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "meta")
 public class Meta {
 	
+	/* Atributos 
+	 ***************************************************************************************************/
 	@Id
 	@Column(name = "id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,19 +40,27 @@ public class Meta {
 	@Column(name = "dataConclusao")
 	private LocalDate dataConclusao;
 	
-	@Column(name = "idFuncionario", nullable = false)
-	private Long idFuncionario;
+	@Column(name = "situacao", nullable=false)
+	private String situacao;
 	
-	@Column(name = "idSetor", nullable = false)
-	private Long idSetor;
 	
-	@Column(name = "idSituacaoServico", nullable = false)
-	private Long idSituacaoServico;
+	/* Atributos - Mapping
+	 ***************************************************************************************************/
+	@ManyToOne
+	@JoinColumn(name="responsavel_id", nullable=false)
+	private Funcionario responsavel;
+	
+	@ManyToOne
+	@JoinColumn(name="setor_id")
+	private Setor setor;
+	
+	@OneToMany(mappedBy = "meta")
+	private List<Tarefa> tarefas = new ArrayList<>();
 
 	/* Construtor 
 	 ***************************************************************************************************/
 	public Meta(Long id, String nome, String descricao, LocalDate dataCriacao, LocalDate dataPrevistaConclusao,
-			LocalDate dataConclusao, Long idFuncionario, Long idSetor, Long idSituacaoServico) {
+			LocalDate dataConclusao, String situacao) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -53,9 +68,11 @@ public class Meta {
 		this.dataCriacao = dataCriacao;
 		this.dataPrevistaConclusao = dataPrevistaConclusao;
 		this.dataConclusao = dataConclusao;
-		this.idFuncionario = idFuncionario;
-		this.idSetor = idSetor;
-		this.idSituacaoServico = idSituacaoServico;
+		this.situacao = situacao;
+	}
+	
+	public Meta() {
+		super();
 	}
 
 	/* Getters e Setters 
@@ -108,34 +125,24 @@ public class Meta {
 		this.dataConclusao = dataConclusao;
 	}
 
-
-	public Long getIdFuncionario() {
-		return idFuncionario;
+	public String getSituacao() {
+		return situacao;
 	}
 
-
-	public void setIdFuncionario(Long idFuncionario) {
-		this.idFuncionario = idFuncionario;
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
 	}
 
-
-	public Long getIdSetor() {
-		return idSetor;
+	public Funcionario getResponsavel() {
+		return responsavel;
 	}
 
-
-	public void setIdSetor(Long idSetor) {
-		this.idSetor = idSetor;
+	public Setor getSetor() {
+		return setor;
 	}
 
-
-	public Long getIdSituacaoServico() {
-		return idSituacaoServico;
-	}
-
-
-	public void setIdSituacaoServico(Long idSituacaoServico) {
-		this.idSituacaoServico = idSituacaoServico;
+	public List<Tarefa> getTarefas() {
+		return tarefas;
 	}
 
 }

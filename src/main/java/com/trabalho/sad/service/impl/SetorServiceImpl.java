@@ -2,6 +2,7 @@ package com.trabalho.sad.service.impl;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
@@ -62,6 +63,13 @@ public class SetorServiceImpl implements SetorService{
 		Objects.requireNonNull(setorParamFiltro.getId());
 		Example<Setor> exampleSetor = Example.of(setorParamFiltro);
 		return setorRepository.findAll(exampleSetor);
+	}
+
+
+	@Override
+	@Transactional
+	public Optional<Setor> consultarPorId(Long id) {
+		return setorRepository.findById(id);
 	}
 
 }
