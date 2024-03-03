@@ -3,11 +3,14 @@ package com.trabalho.sad.service.impl;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.trabalho.sad.api.dto.FuncionarioDTO;
 import com.trabalho.sad.model.entities.Funcionario;
 import com.trabalho.sad.model.entities.status.SituacaoFuncionario;
 import com.trabalho.sad.model.repository.FuncionarioRepository;
@@ -18,14 +21,9 @@ public class FuncionarioServiceImpl implements FuncionarioService{
 	
 		/* Acesso aos métodos de persistência JPA para funcionários
 		 * */
+	@Autowired
 	private FuncionarioRepository funcionarioRepository;
 	
-	/* Construtor 
-	 ***************************************************************************************************/
-	public FuncionarioServiceImpl(FuncionarioRepository funcionarioRepo) {
-		this.funcionarioRepository = funcionarioRepo;
-	}
-
 	
 	/* Métodos 
 	 ***************************************************************************************************/
@@ -61,12 +59,14 @@ public class FuncionarioServiceImpl implements FuncionarioService{
 
 	@Override
 	@Transactional
-	public List<Funcionario> buscar(Funcionario funcionarioParamFiltro) {	
+	public List<FuncionarioDTO> buscar() {	
 			/* Verifica que o parâmetro recebido não é nulo
-			 * */
-		Objects.requireNonNull(funcionarioParamFiltro.getId());
-		Example<Funcionario> exampleFuncionario = Example.of(funcionarioParamFiltro);
-		return funcionarioRepository.findAll(exampleFuncionario);
+			* */
+		List<Funcionario> funcionarios = funcionarioRepository.findAll();
+		List<FuncionarioDTO> funcionariosDTO = funcionarios.stream()
+				.map(FuncionarioDTO::new)
+				.collect(Collectors.toList());
+		return funcionariosDTO;
 	}
 
 

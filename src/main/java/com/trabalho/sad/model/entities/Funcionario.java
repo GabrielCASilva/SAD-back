@@ -67,11 +67,11 @@ public class Funcionario {
 	
 	/* Atributos - Mapping
 	 ***************************************************************************************************/
-	@ManyToOne
-	@JoinColumn(name = "cargo_id", nullable=false)
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "cargo_id")
 	private Cargo cargo;
 	
-	@ManyToOne
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "setorParticipa_id")
 	private Setor setorParticipa;
 	

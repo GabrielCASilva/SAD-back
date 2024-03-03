@@ -3,6 +3,10 @@ package com.trabalho.sad.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import com.trabalho.sad.api.dto.CargoDTO;
 import com.trabalho.sad.model.entities.Cargo;
 
 public interface CargoService {
@@ -13,8 +17,9 @@ public interface CargoService {
 	
 	void deletar(Cargo cargoParam);
 	
-	List<Cargo> buscar(Cargo cargoParam);
+	Page<CargoDTO> buscar(Pageable pageable);
 	
 	Optional<Cargo> consultarPorId(Long id);
 
+	List<CargoDTO> findAll(Long id);
 }

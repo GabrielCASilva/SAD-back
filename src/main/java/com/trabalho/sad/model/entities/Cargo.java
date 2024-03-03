@@ -1,7 +1,10 @@
 package com.trabalho.sad.model.entities;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -55,7 +58,8 @@ public class Cargo {
 	/* Atributos - Mapping
 	 ***************************************************************************************************/
 	@OneToMany(mappedBy = "cargo")
-	private List<Funcionario> funcionarios = new ArrayList<>();
+	private Set<Funcionario> items = new HashSet<>();
+	//private List<Funcionario> funcionarios = new ArrayList<>();
 	
 
 	/* Construtor 
@@ -172,8 +176,30 @@ public class Cargo {
 		this.permitidoProgredirTarefa = permitidoProgredirTarefa;
 	}
 
-	public List<Funcionario> getFuncionarios() {
-		return funcionarios;
+	// public List<Funcionario> getFuncionarios() {
+	// 	return funcionarios;
+	// }
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Cargo other = (Cargo) obj;
+		return Objects.equals(id, other.id);
+	}
+
+	@Override
+	public String toString() {
+		return "Cargo [id = " + this.getId() + "nome = " + this.getNome() + "]";
 	}
 	
 }

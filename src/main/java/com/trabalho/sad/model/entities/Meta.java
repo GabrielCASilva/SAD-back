@@ -46,11 +46,11 @@ public class Meta {
 	
 	/* Atributos - Mapping
 	 ***************************************************************************************************/
-	@ManyToOne
-	@JoinColumn(name="responsavel_id", nullable=false)
+	@ManyToOne(optional = true)
+	@JoinColumn(name="responsavel_id")
 	private Funcionario responsavel;
 	
-	@ManyToOne
+	@ManyToOne(optional = true)
 	@JoinColumn(name="setor_id")
 	private Setor setor;
 	

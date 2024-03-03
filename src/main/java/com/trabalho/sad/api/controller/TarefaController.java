@@ -3,6 +3,7 @@ package com.trabalho.sad.api.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import com.trabalho.sad.service.TarefaService;
  * */
 @RestController
 @RequestMapping("/api/tarefas")
+@CrossOrigin(origins = "*")
 public class TarefaController {
 	
 	TarefaService service;

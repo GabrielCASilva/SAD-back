@@ -1,5 +1,9 @@
 package com.trabalho.sad.api.dto;
 
+import java.time.LocalDate;
+
+import com.trabalho.sad.model.entities.Cargo;
+
 public class CargoDTO {
 	
 	/* Atributos 
@@ -22,7 +26,36 @@ public class CargoDTO {
 	public CargoDTO() {
 		super();
 	}
-	
+
+	public CargoDTO(Long id, String nome, String tipoAvaliacao, boolean permitidoManterMeta, boolean permitidoAvaliacaoServidor,
+			boolean permitidoAvaliacaoSupervisor, boolean permitidoManterFuncionario, boolean permitidoManterSetor,
+			boolean permitidoManterTarefa, boolean permitidoAtribuirTarefa, boolean permitidoProgredirTarefa) {
+		this.id = id;
+		this.nome = nome;
+		this.tipoAvaliacao = tipoAvaliacao;
+		this.permitidoManterMeta = permitidoManterMeta;
+		this.permitidoAvaliacaoServidor = permitidoAvaliacaoServidor;
+		this.permitidoAvaliacaoSupervisor = permitidoAvaliacaoSupervisor;
+		this.permitidoManterFuncionario = permitidoManterFuncionario;
+		this.permitidoManterSetor = permitidoManterSetor;
+		this.permitidoManterTarefa = permitidoManterTarefa;
+		this.permitidoAtribuirTarefa = permitidoAtribuirTarefa;
+		this.permitidoProgredirTarefa = permitidoProgredirTarefa;
+	}
+
+	public CargoDTO(Cargo entity) {
+		this.id = entity.getId();
+		this.nome = entity.getNome();
+		this.tipoAvaliacao = entity.getTipoAvaliacao();
+		this.permitidoManterMeta = entity.isPermitidoManterMeta();
+		this.permitidoAvaliacaoServidor = entity.isPermitidoAvaliacaoServidor();
+		this.permitidoAvaliacaoSupervisor = entity.isPermitidoAvaliacaoSupervisor();
+		this.permitidoManterFuncionario = entity.isPermitidoManterFuncionario();
+		this.permitidoManterSetor = entity.isPermitidoManterSetor();
+		this.permitidoManterTarefa = entity.isPermitidoManterTarefa();
+		this.permitidoAtribuirTarefa = entity.isPermitidoAtribuirTarefa();
+		this.permitidoProgredirTarefa = entity.isPermitidoProgredirTarefa();
+	}
 	
 	/* Getters e Setters 
 	 ***************************************************************************************************/

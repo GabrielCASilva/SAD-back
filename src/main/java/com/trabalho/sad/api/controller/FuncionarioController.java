@@ -1,8 +1,10 @@
 package com.trabalho.sad.api.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.trabalho.sad.api.dto.CargoDTO;
 import com.trabalho.sad.api.dto.FuncionarioDTO;
 import com.trabalho.sad.exceptions.SadException;
+import com.trabalho.sad.model.entities.Cargo;
 import com.trabalho.sad.model.entities.Funcionario;
 import com.trabalho.sad.service.FuncionarioService;
 
@@ -22,6 +26,7 @@ import com.trabalho.sad.service.FuncionarioService;
 	 * */
 @RestController
 @RequestMapping("/api/funcionarios")
+@CrossOrigin(origins = "*")
 public class FuncionarioController {
 	
 	FuncionarioService service;
@@ -138,26 +143,60 @@ public class FuncionarioController {
 	
 		/* http://localhost:8080/api/funcionarios/buscar
 		 * */
-	@GetMapping("/buscar")
-	public ResponseEntity buscar(
-			@RequestParam(value = "id", required = false) Long id,
-			@RequestParam(value = "nome", required = false) String nome,
-			@RequestParam(value = "cpf", required = false) Long cpf,
-			@RequestParam(value = "telefone", required = false) Long telefone,
-			@RequestParam(value = "email", required = false) String email,
-			@RequestParam(value = "login", required = false) String login,
-			@RequestParam(value = "situacao", required = false) String situacao
-			) {
-		Funcionario funcionarioFiltro = new Funcionario();
-		funcionarioFiltro.setId(id);
-		funcionarioFiltro.setNome(nome);
-		funcionarioFiltro.setCpf(cpf);
-		funcionarioFiltro.setTelefone(telefone);
-		funcionarioFiltro.setEmail(email);
-		funcionarioFiltro.setLogin(login);
-		funcionarioFiltro.setSituacao(situacao);
+	// @GetMapping("/buscar")
+	// public ResponseEntity<List<Funcionario>> buscar(
+	// 		@RequestParam(value = "id", required = false) Long id,
+	// 		@RequestParam(value = "nome", required = false) String nome,
+	// 		@RequestParam(value = "cpf", required = false) Long cpf,
+	// 		@RequestParam(value = "telefone", required = false) Long telefone,
+	// 		@RequestParam(value = "email", required = false) String email,
+	// 		@RequestParam(value = "login", required = false) String login,
+	// 		@RequestParam(value = "situacao", required = false) String situacao
+	// 		) {
+	// 	Funcionario funcionarioFiltro = new Funcionario();
+	// 	funcionarioFiltro.setId(id);
+	// 	funcionarioFiltro.setNome(nome);
+	// 	funcionarioFiltro.setCpf(cpf);
+	// 	funcionarioFiltro.setTelefone(telefone);
+	// 	funcionarioFiltro.setEmail(email);
+	// 	funcionarioFiltro.setLogin(login);
+	// 	funcionarioFiltro.setSituacao(situacao);
 		
-		List<Funcionario> funcionarios = service.buscar(funcionarioFiltro);
-		return ResponseEntity.ok(funcionarios);
+	// 	List<Funcionario> funcionarios = service.buscar(funcionarioFiltro);
+	// 	return ResponseEntity.ok(funcionarios);
+	// }
+
+	@GetMapping("/buscar")
+	public ResponseEntity<List<FuncionarioDTO>> buscar() {
+
+		List<FuncionarioDTO> funcionariosDTO = service.buscar();
+
+		// Converter Funcionario para FuncionarioDTO
+		// List<FuncionarioDTO> funcionariosDTO = funcionarios.stream()
+		// 		.map(funcionario -> {
+		// 			FuncionarioDTO dto = new FuncionarioDTO();
+		// 			dto.setId(funcionario.getId());
+		// 			dto.setNome(funcionario.getNome());
+		// 			dto.setCpf(funcionario.getCpf());
+		// 			dto.setTelefone(funcionario.getTelefone());
+		// 			dto.setEmail(funcionario.getEmail());
+		// 			dto.setLogin(funcionario.getLogin());
+		// 			dto.setSituacao(funcionario.getSituacao());
+
+		// 			Cargo cargo = funcionario.getCargo();
+		// 			if (cargo != null) {
+		// 				CargoDTO cargoDTO = new CargoDTO();
+		// 				cargoDTO.setId(cargo.getId());
+		// 				cargoDTO.setNome(cargo.getNome());
+		// 				dto.setCargo(cargoDTO);
+		// 			}
+
+		// 			return dto;
+		// 		})
+		// 		.collect(Collectors.toList());
+
+		return ResponseEntity.ok(funcionariosDTO);
 	}
+
+
 }

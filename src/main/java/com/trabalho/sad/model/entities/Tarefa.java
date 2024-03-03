@@ -34,7 +34,7 @@ public class Tarefa {
 	@Column(name = "dataPrevistaConclusao", nullable = false)
 	private LocalDate dataPrevistaConclusao;
 	
-	@Column(name = "datainicio")
+	@Column(name = "dataInicio")
 	private LocalDate dataInicio;
 	
 	@Column(name = "dataConclusao")
@@ -48,16 +48,16 @@ public class Tarefa {
 	
 	/* Atributos - Mapping
 	 ***************************************************************************************************/
-	@ManyToOne
-	@JoinColumn(name = "meta_id", nullable=false)
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "meta_id")
 	private Meta meta;
 	
-	@ManyToOne
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "funcionarioAlocado_id")
 	private Funcionario funcionarioAlocado;
 	
-	@ManyToOne
-	@JoinColumn(name = "funcionarioResponsavel_id", nullable = false)
+	@ManyToOne(optional = true)
+	@JoinColumn(name = "funcionarioResponsavel_id")
 	private Funcionario funcionarioResponsavel;
 	
 	
