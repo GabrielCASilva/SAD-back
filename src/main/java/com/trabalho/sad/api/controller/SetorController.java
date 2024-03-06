@@ -133,7 +133,7 @@ public class SetorController {
 		return ResponseEntity.ok(setores);
 	}
 
-		@GetMapping("/buscar2")
+	@GetMapping("/buscar2")
 	public ResponseEntity<List<SetorDTO>> findAll() {
 
 		List<SetorDTO> dto = service.findAll();
