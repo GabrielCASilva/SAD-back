@@ -1,5 +1,8 @@
 package com.trabalho.sad.api.dto;
 
+import com.trabalho.sad.model.entities.Funcionario;
+import com.trabalho.sad.model.entities.Setor;
+
 public class SetorDTO {
 	
 	/* Atributos 
@@ -8,6 +11,7 @@ public class SetorDTO {
 	private String nome;
 	private String localizacao;
 	private Long ramal;
+	private FuncionarioDTO supervisor = new FuncionarioDTO();
 	
 	
 	/* Construtor 
@@ -17,6 +21,22 @@ public class SetorDTO {
 	}
 	
 	
+	public SetorDTO(Long id, String nome, String localizacao, Long ramal, FuncionarioDTO supervisor) {
+		this.id = id;
+		this.nome = nome;
+		this.localizacao = localizacao;
+		this.ramal = ramal;
+		this.supervisor = supervisor;
+	}
+
+	public SetorDTO(Setor entity) {
+		this.id = entity.getId();
+		this.nome = entity.getNome();
+		this.localizacao = entity.getLocalizacao();
+		this.ramal = entity.getRamal();
+		this.supervisor = new FuncionarioDTO(entity.getSupervisor());;
+	}
+
 	/* Getters e Setters 
 	 ***************************************************************************************************/
 	public Long getId() {
@@ -42,6 +62,15 @@ public class SetorDTO {
 	}
 	public void setRamal(Long ramal) {
 		this.ramal = ramal;
+	}
+
+	public FuncionarioDTO getSupervisor() {
+		return supervisor;
+	}
+
+
+	public void setSupervisor(FuncionarioDTO supervisor) {
+		this.supervisor = supervisor;
 	}
 
 }

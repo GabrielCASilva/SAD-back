@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.trabalho.sad.api.dto.FuncionarioDTO;
 import com.trabalho.sad.api.dto.SetorDTO;
 import com.trabalho.sad.exceptions.SadException;
 import com.trabalho.sad.model.entities.Setor;
@@ -130,6 +131,13 @@ public class SetorController {
 		
 		List<Setor> setores = service.buscar(setorFiltro);
 		return ResponseEntity.ok(setores);
+	}
+
+		@GetMapping("/buscar2")
+	public ResponseEntity<List<SetorDTO>> findAll() {
+
+		List<SetorDTO> dto = service.findAll();
+		return ResponseEntity.ok(dto);
 	}
 	
 }
