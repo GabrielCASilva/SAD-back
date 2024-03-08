@@ -133,17 +133,9 @@ public class MetaController {
 		/* http://localhost:8080/api/metas/buscar
 		 * */
 	@GetMapping("/buscar")
-	public ResponseEntity buscar(
-			@RequestParam(value = "id", required = false) Long id,
-			@RequestParam(value = "nome", required = false) String nome,
-			@RequestParam(value = "situacao", required = false) String situacao
-			) {
-		Meta metaFiltro = new Meta();
-		metaFiltro.setId(id);
-		metaFiltro.setNome(nome);
-		metaFiltro.setSituacao(situacao);
+	public ResponseEntity<List<MetaDTO>> buscar() {
 		
-		List<Meta> metas = service.buscar(metaFiltro);
+		List<MetaDTO> metas = service.buscar();
 		return ResponseEntity.ok(metas);
 	}
 }

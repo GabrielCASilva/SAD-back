@@ -3,11 +3,15 @@ package com.trabalho.sad.service.impl;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.trabalho.sad.api.dto.FuncionarioDTO;
+import com.trabalho.sad.api.dto.MetaDTO;
+import com.trabalho.sad.model.entities.Funcionario;
 import com.trabalho.sad.model.entities.Meta;
 import com.trabalho.sad.model.entities.status.SituacaoServico;
 import com.trabalho.sad.model.repository.MetaRepository;
@@ -54,18 +58,20 @@ public class MetaServiceImpl implements MetaService{
 	public Meta inativar(Meta metaParam) {
 			/* Para inativar, a situação da meta deve ser 'Inativa'.
 			 * */
-		metaParam.setSituacao(SituacaoServico.INATIVA.toString());
+		//metaParam.setSituacao(SituacaoServico.INATIVA.toString());
 		return metaRepository.save(metaParam);
 	}
 
 	@Override
 	@Transactional
-	public List<Meta> buscar(Meta metaParamFiltro) {	
+	public List<MetaDTO> buscar() {	
 			/* Verifica que o parâmetro recebido não é nulo
 			 * */
-		Objects.requireNonNull(metaParamFiltro.getId());
-		Example<Meta> exampleMeta = Example.of(metaParamFiltro);
-		return metaRepository.findAll(exampleMeta);
+		List<Meta> metas = metaRepository.findAll();
+		List<MetaDTO> dto = metas.stream()
+				.map(MetaDTO::new)
+				.collect(Collectors.toList());
+		return dto;
 	}
 
 	@Override

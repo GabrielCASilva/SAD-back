@@ -12,11 +12,11 @@ INSERT INTO funcionario (nome, data_nascimento, sexo, cpf, cep, endereco, telefo
 
 -- INSERT METAS
 -- INSERT INTO meta (nome, descricao, data_criacao, data_prevista_conclusao, data_conclusao, situacao) VALUES ();
-INSERT INTO meta (nome, descricao, data_criacao, data_prevista_conclusao, data_conclusao, situacao) VALUES ('Meta de Vendas', 'Atingir um aumento de 10% nas vendas no próximo trimestre', '2024-03-03', '2024-06-30', NULL, 'Pendente');
+INSERT INTO meta (nome, descricao, data_criacao, data_prevista_conclusao, data_conclusao, situacao) VALUES ('Meta de Vendas', 'Atingir um aumento de 10% nas vendas no próximo trimestre', '2024-03-03', '2024-06-30', NULL, 'ATIVA');
 
 -- INSERT TAREFAS
 -- INSERT INTO tarefa (nome, descricao, data_criacao, data_prevista_conclusao, data_inicio, data_conclusao, taxa_progresso, situacao, meta_id, funcionario_alocado_id, funcionario_responsavel_id) VALUES ();
-INSERT INTO tarefa (nome, descricao, data_criacao, data_prevista_conclusao, data_inicio, data_conclusao, taxa_progresso, situacao) VALUES ('Implementar novo recurso', 'Desenvolver e implementar um novo recurso para o sistema', '2024-03-03', '2024-06-30', NULL, NULL, 0, 'Pendente');
+INSERT INTO tarefa (nome, descricao, data_criacao, data_prevista_conclusao, data_inicio, data_conclusao, taxa_progresso, situacao) VALUES ('Implementar novo recurso', 'Desenvolver e implementar um novo recurso para o sistema', '2024-03-03', '2024-06-30', NULL, NULL, 0, 'Ativa');
 
 -- INSERT SETORES
 -- INSERT INTO setor (nome, localizacao, ramal, supervisor_id) VALUES ();

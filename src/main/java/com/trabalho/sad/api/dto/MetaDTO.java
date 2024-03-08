@@ -2,6 +2,9 @@ package com.trabalho.sad.api.dto;
 
 import java.time.LocalDate;
 
+import com.trabalho.sad.model.entities.Meta;
+import com.trabalho.sad.model.entities.status.SituacaoServico;
+
 public class MetaDTO {
 	
 	/* Atributos 
@@ -12,9 +15,13 @@ public class MetaDTO {
 	private LocalDate dataCriacao;
 	private LocalDate dataPrevistaConclusao;
 	private LocalDate dataConclusao;
-	private String situacao;
+	private SituacaoServico situacao;
+	private FuncionarioDTO responsavel;
+	private SetorDTO setor;
 	
-	
+
+
+
 	/* Construtor 
 	 ***************************************************************************************************/
 	public MetaDTO() {
@@ -22,6 +29,32 @@ public class MetaDTO {
 	}
 	
 	
+	public MetaDTO(Long id, String nome, String descricao, LocalDate dataCriacao, LocalDate dataPrevistaConclusao,
+			LocalDate dataConclusao, SituacaoServico situacao, FuncionarioDTO responsavel, SetorDTO setor ) {
+		this.id = id;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.dataCriacao = dataCriacao;
+		this.dataPrevistaConclusao = dataPrevistaConclusao;
+		this.dataConclusao = dataConclusao;
+		this.situacao = situacao;
+		this.responsavel = responsavel;
+		this.setor = setor;
+	}
+
+	public MetaDTO(Meta entity) {
+		this.id = entity.getId();
+		this.nome = entity.getNome();
+		this.descricao = entity.getDescricao();
+		this.dataCriacao = entity.getDataCriacao();
+		this.dataPrevistaConclusao = entity.getDataPrevistaConclusao();
+		this.dataConclusao = entity.getDataConclusao();
+		this.situacao = entity.getSituacao();
+		this.responsavel = new FuncionarioDTO(entity.getResponsavel());
+		this.setor = new SetorDTO(entity.getSetor());
+	}
+
+
 	/* Getters e Setters 
 	 ***************************************************************************************************/
 	public Long getId() {
@@ -61,12 +94,32 @@ public class MetaDTO {
 		this.dataConclusao = dataConclusao;
 	}
 
-	public String getSituacao() {
+	public SituacaoServico getSituacao() {
 		return situacao;
 	}
 
-	public void setSituacao(String situacao) {
+	public void setSituacao(SituacaoServico situacao) {
 		this.situacao = situacao;
+	}
+
+		
+	public FuncionarioDTO getResponsavel() {
+		return responsavel;
+	}
+
+
+	public void setResponsavel(FuncionarioDTO responsavel) {
+		this.responsavel = responsavel;
+	}
+
+
+	public SetorDTO getSetor() {
+		return setor;
+	}
+
+
+	public void setSetor(SetorDTO setor) {
+		this.setor = setor;
 	}
 	
 }

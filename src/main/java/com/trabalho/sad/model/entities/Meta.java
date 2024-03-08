@@ -4,8 +4,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.trabalho.sad.model.entities.status.SituacaoServico;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -40,8 +44,9 @@ public class Meta {
 	@Column(name = "dataConclusao")
 	private LocalDate dataConclusao;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(name = "situacao", nullable=false)
-	private String situacao;
+	private SituacaoServico situacao;
 	
 	
 	/* Atributos - Mapping
@@ -60,7 +65,7 @@ public class Meta {
 	/* Construtor 
 	 ***************************************************************************************************/
 	public Meta(Long id, String nome, String descricao, LocalDate dataCriacao, LocalDate dataPrevistaConclusao,
-			LocalDate dataConclusao, String situacao) {
+			LocalDate dataConclusao, SituacaoServico situacao) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -125,11 +130,11 @@ public class Meta {
 		this.dataConclusao = dataConclusao;
 	}
 
-	public String getSituacao() {
+	public SituacaoServico getSituacao() {
 		return situacao;
 	}
 
-	public void setSituacao(String situacao) {
+	public void setSituacao(SituacaoServico situacao) {
 		this.situacao = situacao;
 	}
 
