@@ -16,37 +16,39 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "setor")
 public class Setor {
-	
-	/* Atributos 
+
+	/*
+	 * Atributos
 	 ***************************************************************************************************/
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(name = "nome", nullable = false)
 	private String nome;
-	
+
 	@Column(name = "localizacao", nullable = false)
 	private String localizacao;
-	
+
 	@Column(name = "ramal", nullable = false)
 	private Long ramal;
-	
-	/* Atributos - Mapping
+
+	/*
+	 * Atributos - Mapping
 	 ***************************************************************************************************/
 	@OneToMany(mappedBy = "setorParticipa")
 	private List<Funcionario> funcionarios = new ArrayList<>();
-	
-	@OneToOne
-	@JoinColumn(name="supervisor_id", referencedColumnName = "id")
-	private Funcionario supervisor;
-	
-	@OneToMany(mappedBy = "setor")
-	private List<Meta> metas  = new ArrayList<>();
-	
 
-	/* Construtor 
+	@OneToOne(optional = true)
+	@JoinColumn(name = "supervisor_id", referencedColumnName = "id")
+	private Funcionario supervisor;
+
+	@OneToMany(mappedBy = "setor")
+	private List<Meta> metas = new ArrayList<>();
+
+	/*
+	 * Construtor
 	 ***************************************************************************************************/
 	public Setor(Long id, String nome, String localizacao, Long ramal) {
 		super();
@@ -55,47 +57,41 @@ public class Setor {
 		this.localizacao = localizacao;
 		this.ramal = ramal;
 	}
-	
+
 	public Setor() {
 		super();
 	}
 
-	/* Getters e Setters 
+	/*
+	 * Getters e Setters
 	 ***************************************************************************************************/
 	public Long getId() {
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public String getNome() {
 		return nome;
 	}
 
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 
 	public String getLocalizacao() {
 		return localizacao;
 	}
 
-
 	public void setLocalizacao(String localizacao) {
 		this.localizacao = localizacao;
 	}
 
-
 	public Long getRamal() {
 		return ramal;
 	}
-
 
 	public void setRamal(Long ramal) {
 		this.ramal = ramal;
@@ -112,5 +108,5 @@ public class Setor {
 	public List<Meta> getMetas() {
 		return metas;
 	}
-	
+
 }
