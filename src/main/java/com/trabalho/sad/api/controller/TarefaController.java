@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import com.trabalho.sad.service.TarefaService;
 
 @RestController
 @RequestMapping(value = "/tarefas")
+@CrossOrigin(origins = "*")
 public class TarefaController {
 
 	@Autowired
@@ -36,7 +38,7 @@ public class TarefaController {
 		return tarefa;
 	}
 	
-	@PostMapping("/salvar{id}")
+	@PostMapping("/salvar/{id}")
 	public ResponseEntity<?> cadastrar(@RequestBody TarefaDTO dto) {
 		try {
 			Tarefa obj = converter(dto);
