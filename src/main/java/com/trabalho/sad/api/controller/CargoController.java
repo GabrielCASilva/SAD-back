@@ -41,7 +41,7 @@ public class CargoController {
 		return cargo;
 	}
 	
-	@PostMapping("/salvar/{id}")
+	@PostMapping
 	public ResponseEntity<?> cadastrar(@RequestBody CargoDTO dto) {
 		try {
 			Cargo obj = converter(dto);

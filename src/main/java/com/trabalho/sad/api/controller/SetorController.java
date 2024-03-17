@@ -34,7 +34,7 @@ public class SetorController {
 		return setor;
 	}
 		
-	@PostMapping("/salvar/{id}")
+	@PostMapping
 	public ResponseEntity<?> cadastrar(@RequestBody SetorDTO dto) {
 		try {
 			Setor obj = converter(dto);

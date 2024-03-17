@@ -36,7 +36,7 @@ public class MetaController {
 		return meta;
 	}
 
-	@PostMapping("/salvar/{id}")
+	@PostMapping
 	public ResponseEntity<?> cadastrar(@RequestBody MetaDTO dto) {
 		try {
 			Meta obj = converter(dto);

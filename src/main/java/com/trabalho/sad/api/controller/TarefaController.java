@@ -38,7 +38,7 @@ public class TarefaController {
 		return tarefa;
 	}
 	
-	@PostMapping("/salvar/{id}")
+	@PostMapping
 	public ResponseEntity<?> cadastrar(@RequestBody TarefaDTO dto) {
 		try {
 			Tarefa obj = converter(dto);

@@ -43,7 +43,7 @@ public class FuncionarioController {
 		return funcionario;
 	}
 	
-	@PostMapping("/salvar/{id}")
+	@PostMapping
 	public ResponseEntity<?> cadastrar(@RequestBody FuncionarioDTO dto) {
 		try {
 			Funcionario obj = converter(dto);
