@@ -130,6 +130,66 @@ public class Funcionario implements Serializable {
 		return dataNascimento;
 	}
 
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public LocalDate getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(LocalDate dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getSenhaHash() {
+		return senhaHash;
+	}
+
+	public Setor getSetor() {
+		return setor;
+	}
+
+	public void setSetor(Setor setor) {
+		this.setor = setor;
+	}
+
+	public Cargo getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}
+
+	
+	public SituacaoFuncionario getSituacaoFuncionario() {
+		return SituacaoFuncionario.valueOf(situacaoFuncionario);
+	}
+
+	public void setSituacaoFuncionario(SituacaoFuncionario situacaoFuncionario) {
+		if (situacaoFuncionario != null) {
+			this.situacaoFuncionario = situacaoFuncionario.getCode();
+		}
+	}
+
+
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
@@ -178,65 +238,12 @@ public class Funcionario implements Serializable {
 		return foto;
 	}
 
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public LocalDate getDataCadastro() {
-		return dataCadastro;
-	}
-
-	public void setDataCadastro(LocalDate dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public String getSenhaHash() {
-		return senhaHash;
-	}
-
 	public void setSenhaHash(String senhaHash) {
 		this.senhaHash = senhaHash;
 	}
 
-	public Setor getSetor() {
-		return setor;
+	public void setSituacaoFuncionario(String situacaoFuncionario) {
+		this.situacaoFuncionario = situacaoFuncionario;
 	}
-
-	public void setSetor(Setor setor) {
-		this.setor = setor;
-	}
-
-	public Cargo getCargo() {
-		return cargo;
-	}
-
-	public void setCargo(Cargo cargo) {
-		this.cargo = cargo;
-	}
-
-	public SituacaoFuncionario getSituacaoFuncionario() {
-		return SituacaoFuncionario.valueOf(situacaoFuncionario);
-	}
-
-	public void setSituacaoFuncionario(SituacaoFuncionario situacaoFuncionario) {
-		if (situacaoFuncionario != null) {
-			this.situacaoFuncionario = situacaoFuncionario.getCode();
-		}
-	}
+	
 }

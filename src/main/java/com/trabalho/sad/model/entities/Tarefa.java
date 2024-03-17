@@ -123,22 +123,6 @@ public class Tarefa implements Serializable {
 		this.dataPrevistaConclusao = dataPrevistaConclusao;
 	}
 
-	public LocalDate getDataInicio() {
-		return dataInicio;
-	}
-
-	public void setDataInicio(LocalDate dataInicio) {
-		this.dataInicio = dataInicio;
-	}
-
-	public LocalDate getDataConclusao() {
-		return dataConclusao;
-	}
-
-	public void setDataConclusao(LocalDate dataConclusao) {
-		this.dataConclusao = dataConclusao;
-	}
-
 	public double getTaxaProgresso() {
 		return taxaProgresso;
 	}
@@ -180,5 +164,29 @@ public class Tarefa implements Serializable {
 
 	public void setMeta(Meta meta) {
 		this.meta = meta;
+	}
+
+	public LocalDate getDataInicio() {
+		return dataInicio;
+	}
+
+
+	public void setDataInicio(LocalDate dataInicio) {
+		this.dataInicio = dataInicio;
+	}
+
+
+	public LocalDate getDataConclusao() {
+		return dataConclusao;
+	}
+
+
+	public void setDataConclusao(LocalDate dataConclusao) {
+		this.dataConclusao = dataConclusao;
+	}
+
+
+	public void setSituacaoTarefa(String situacaoTarefa) {
+		this.situacaoTarefa = situacaoTarefa;
 	}
 }

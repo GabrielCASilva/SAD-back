@@ -78,7 +78,6 @@ public class Cargo implements Serializable {
 		this.permitidoAtribuirTarefa = permitidoAtribuirTarefa;
 		this.permitidoProgredirTarefa = permitidoProgredirTarefa;
 	}
-
 	public Long getId() {
 		return id;
 	}

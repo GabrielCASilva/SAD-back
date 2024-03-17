@@ -5,7 +5,7 @@ public enum SituacaoMeta {
 
 	ATIVO 	    ("ATIVO"),
 	INATIVO     ("INATIVO"),
-	EM_ANDAMENTO("EM ANDAMENTO"),
+	EM_ANDAMENTO("EM_ANDAMENTO"),
 	CONCLUÍDO   ("CONCLUÍDO");
 
 	
