@@ -1,31 +1,20 @@
 package com.trabalho.sad.api.dto;
 
 public class CargoDTO {
-	
-	/* Atributos 
-	 ***************************************************************************************************/
+
 	private Long id;
 	private String nome;
-	private String tipoAvaliacao;
-	private boolean permitidoManterMeta;
-	private boolean permitidoAvaliacaoServidor;
-	private boolean permitidoAvaliacaoSupervisor;
-	private boolean permitidoManterFuncionario;
-	private boolean permitidoManterSetor;
-	private boolean permitidoManterTarefa;
-	private boolean permitidoAtribuirTarefa;
+	private String tipoAvaliacao;	
+	private boolean permitidoManterMeta;	
+	private boolean permitidoAvaliacaoServidor;	
+	private boolean permitidoAvaliacaoSupervisor;	
+	private boolean permitidoManterFuncionario;	
+	private boolean permitidoManterSetor;	
+	private boolean permitidoManterTarefa;	
+	private boolean permitidoAtribuirTarefa;	
 	private boolean permitidoProgredirTarefa;
 	
 	
-	/* Construtor 
-	 ***************************************************************************************************/
-	public CargoDTO() {
-		super();
-	}
-	
-	
-	/* Getters e Setters 
-	 ***************************************************************************************************/
 	public Long getId() {
 		return id;
 	}
@@ -91,7 +80,5 @@ public class CargoDTO {
 	}
 	public void setPermitidoProgredirTarefa(boolean permitidoProgredirTarefa) {
 		this.permitidoProgredirTarefa = permitidoProgredirTarefa;
-	}
-	
-
+	}	
 }

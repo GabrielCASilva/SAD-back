@@ -1,8 +1,12 @@
 package com.trabalho.sad.model.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.trabalho.sad.model.entities.enums.SituacaoMeta;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,10 +20,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "meta")
-public class Meta {
+public class Meta implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
-	/* Atributos 
-	 ***************************************************************************************************/
 	@Id
 	@Column(name = "id", nullable = false)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,43 +43,39 @@ public class Meta {
 	@Column(name = "dataConclusao")
 	private LocalDate dataConclusao;
 	
-	@Column(name = "situacao", nullable=false)
-	private String situacao;
-	
-	
-	/* Atributos - Mapping
-	 ***************************************************************************************************/
-	@ManyToOne
-	@JoinColumn(name="responsavel_id", nullable=false)
-	private Funcionario responsavel;
+	@Column(name = "situacaoMeta")
+	private String situacaoMeta;
 	
 	@ManyToOne
-	@JoinColumn(name="setor_id")
+	@JoinColumn(name = "diretor_id")
+	private Funcionario diretor;	
+	
+	@ManyToOne
+	@JoinColumn(name = "setor_id")
 	private Setor setor;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "meta")
 	private List<Tarefa> tarefas = new ArrayList<>();
+	
+	public Meta() {
+	}		
 
-	/* Construtor 
-	 ***************************************************************************************************/
-	public Meta(Long id, String nome, String descricao, LocalDate dataCriacao, LocalDate dataPrevistaConclusao,
-			LocalDate dataConclusao, String situacao) {
+	public Meta(String nome, String descricao, LocalDate dataCriacao, LocalDate dataPrevistaConclusao,
+			LocalDate dataConclusao, SituacaoMeta situacaoMeta, Funcionario diretor, Setor setor) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.dataCriacao = dataCriacao;
 		this.dataPrevistaConclusao = dataPrevistaConclusao;
 		this.dataConclusao = dataConclusao;
-		this.situacao = situacao;
-	}
-	
-	public Meta() {
-		super();
+		setSituacaoMeta(situacaoMeta);
+		this.diretor = diretor;
+		this.setor = setor;
 	}
 
-	/* Getters e Setters 
-	 ***************************************************************************************************/
+
+
 	public Long getId() {
 		return id;
 	}
@@ -125,24 +124,29 @@ public class Meta {
 		this.dataConclusao = dataConclusao;
 	}
 
-	public String getSituacao() {
-		return situacao;
+	public SituacaoMeta getSituacaoMeta() {
+		return SituacaoMeta.valueOf(situacaoMeta);
 	}
 
-	public void setSituacao(String situacao) {
-		this.situacao = situacao;
+	public void setSituacaoMeta(SituacaoMeta situacaoMeta) {
+		if (situacaoMeta != null) {
+			this.situacaoMeta = situacaoMeta.getCode();
+		}
 	}
 
-	public Funcionario getResponsavel() {
-		return responsavel;
+	public Funcionario getDiretor() {
+		return diretor;
+	}
+
+	public void setDiretor(Funcionario diretor) {
+		this.diretor = diretor;
 	}
 
 	public Setor getSetor() {
 		return setor;
 	}
 
-	public List<Tarefa> getTarefas() {
-		return tarefas;
+	public void setSetor(Setor setor) {
+		this.setor = setor;
 	}
-
 }

@@ -2,146 +2,67 @@ package com.trabalho.sad.api.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.trabalho.sad.api.dto.MetaDTO;
-import com.trabalho.sad.exceptions.SadException;
+import com.trabalho.sad.exceptions.RegraNegocioException;
 import com.trabalho.sad.model.entities.Meta;
 import com.trabalho.sad.service.MetaService;
 
-	/* http://localhost:8080/api/metas
-	 * */
 @RestController
-@RequestMapping("/api/metas")
+@RequestMapping(value = "/metas")
+@CrossOrigin(origins = "*")
 public class MetaController {
-	
-	MetaService service;
-	
-	/* Construtor 
-	 ***************************************************************************************************/
-	public MetaController(MetaService service) {
-		this.service = service;
-	}
 
-	
-	/* Métodos 
-	 ***************************************************************************************************/
-	
-		/* Conversor de objetos DTO em Entidades
-		 * */
+	@Autowired
+	MetaService metaService;
+
 	private Meta converter(MetaDTO dto) {
 		Meta meta = new Meta();
-		
 		meta.setNome(dto.getNome());
 		meta.setDescricao(dto.getDescricao());
 		meta.setDataCriacao(dto.getDataCriacao());
 		meta.setDataPrevistaConclusao(dto.getDataPrevistaConclusao());
 		meta.setDataConclusao(dto.getDataConclusao());
-		meta.setSituacao(dto.getSituacao());
-		
-		if(dto.getId() != null) {
-			meta.setId(dto.getId());
-		}
-		
 		return meta;
 	}
 
-		/* http://localhost:8080/api/metas/cadastrar
-		 * */
-	//TODO Proteger
-	//	1) Data prevista de conclusao deve ser maior que data de criacao
-	//	2) Data de conclusao deve ser maior que data de criacao
-	@PostMapping("/cadastrar")
-	public ResponseEntity cadastrar( @RequestBody MetaDTO dto) {
+	@PostMapping("/salvar/{id}")
+	public ResponseEntity<?> cadastrar(@RequestBody MetaDTO dto) {
 		try {
-			Meta entidadeMeta = this.converter(dto);
-			entidadeMeta = this.service.cadastrar(entidadeMeta);
-			return ResponseEntity.ok(entidadeMeta);
-		} catch (SadException sadException) {
-			return ResponseEntity.badRequest().body(sadException.getMessage());
+			Meta obj = converter(dto);
+			obj = metaService.cadastrar(obj);
+			return ResponseEntity.ok(obj);
+		} catch (RegraNegocioException regraNegocioException) {
+			return ResponseEntity.badRequest().body(regraNegocioException.getMessage());
 		}
 	}
-	
-		/* http://localhost:8080/api/metas/atualizar/{id}
-		 * */
-	//TODO Proteger
-	//	1) Não pode mudar data de criação
-	//	2) Data prevista de conclusao deve ser maior que data de criacao
-	//	3) Data de conclusao deve ser maior que data de criacao
-	@PutMapping("/atualizar/{id}")
-	public ResponseEntity atualizar( @PathVariable("id") Long id, @RequestBody MetaDTO dto) {
-		return service.consultarPorId(id).map(
-					entity -> {
-						try {
-					/* Meta encontrada
-					 * */
-							Meta meta = this.converter(dto);
-							meta.setId(entity.getId());
-							service.atualizar(meta);
-							return ResponseEntity.ok(meta);
-						} catch (SadException sadException) {
-					/* Meta encontrada, porém erro na manipulação
-					 * */
-							return ResponseEntity.badRequest().body(sadException.getMessage());
-						}
-					}
-				).orElseGet(
-					/* Meta não encontrada
-					 * */
-						() -> ResponseEntity.badRequest().body("Erro: Não foi possível encontrar uma "
-								+ "meta com o ID informado.")
-						);
+
+	@PutMapping(value = "/{id}")
+	public ResponseEntity<Meta> atualizar(@PathVariable Long id, @RequestBody MetaDTO dto) {
+		Meta obj = converter(dto);
+		obj = metaService.atualizar(id, obj);
+		return ResponseEntity.ok().body(obj);
 	}
-	
-		/* http://localhost:8080/api/metas/inativar/{id}
-		 * */
-	@PutMapping("/inativar/{id}")
-	public ResponseEntity inativar( @PathVariable("id") Long id, @RequestBody MetaDTO dto) {
-		return service.consultarPorId(id).map(
-					entity -> {
-						try {
-					/* Meta encontrada
-					 * */
-							Meta meta = this.converter(dto);
-							meta.setId(entity.getId());
-							service.inativar(meta);
-							return ResponseEntity.ok(meta);
-						} catch (SadException sadException) {
-					/* Meta encontrada, porém erro na manipulação
-					 * */
-							return ResponseEntity.badRequest().body(sadException.getMessage());
-						}
-					}
-				).orElseGet(
-					/* Meta não encontrada
-					 * */
-						() -> ResponseEntity.badRequest().body("Erro: Não foi possível encontrar uma "
-								+ "meta com o ID informado, logo a inativação não pode ser realizada.")
-						);
+
+	@GetMapping
+	public ResponseEntity<List<Meta>> buscar() {
+		List<Meta> list = metaService.buscar();
+		return ResponseEntity.ok().body(list);
 	}
-	
-		/* http://localhost:8080/api/metas/buscar
-		 * */
-	@GetMapping("/buscar")
-	public ResponseEntity buscar(
-			@RequestParam(value = "id", required = false) Long id,
-			@RequestParam(value = "nome", required = false) String nome,
-			@RequestParam(value = "situacao", required = false) String situacao
-			) {
-		Meta metaFiltro = new Meta();
-		metaFiltro.setId(id);
-		metaFiltro.setNome(nome);
-		metaFiltro.setSituacao(situacao);
-		
-		List<Meta> metas = service.buscar(metaFiltro);
-		return ResponseEntity.ok(metas);
+
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<Meta> consultarPorId(@PathVariable Long id) {
+		Meta obj = metaService.consultarPorId(id);
+		return ResponseEntity.ok().body(obj);
 	}
 }

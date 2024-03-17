@@ -1,7 +1,10 @@
 package com.trabalho.sad.model.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,10 +16,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "cargo")
-public class Cargo {
+public class Cargo implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
-	/* Atributos 
-	 ***************************************************************************************************/
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,20 +54,19 @@ public class Cargo {
 	@Column(name = "permitidoProgredirTarefa", nullable = false)
 	private boolean permitidoProgredirTarefa;
 	
-	/* Atributos - Mapping
-	 ***************************************************************************************************/
+	@JsonIgnore
 	@OneToMany(mappedBy = "cargo")
-	private List<Funcionario> funcionarios = new ArrayList<>();
-	
+	private List<Funcionario> funcionarios = new ArrayList<>();	
 
-	/* Construtor 
-	 ***************************************************************************************************/
-	public Cargo(Long id, String nome, String tipoAvaliacao, boolean permitidoManterMeta,
+	
+	public Cargo() {
+	}
+	
+	public Cargo(String nome, String tipoAvaliacao, boolean permitidoManterMeta,
 			boolean permitidoAvaliacaoServidor, boolean permitidoAvaliacaoSupervisor,
 			boolean permitidoManterFuncionario, boolean permitidoManterSetor, boolean permitidoManterTarefa,
 			boolean permitidoAtribuirTarefa, boolean permitidoProgredirTarefa) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.tipoAvaliacao = tipoAvaliacao;
 		this.permitidoManterMeta = permitidoManterMeta;
@@ -77,13 +78,6 @@ public class Cargo {
 		this.permitidoAtribuirTarefa = permitidoAtribuirTarefa;
 		this.permitidoProgredirTarefa = permitidoProgredirTarefa;
 	}
-	
-	public Cargo() {
-		super();
-	}
-
-	/* Getters e Setters 
-	 ***************************************************************************************************/
 	public Long getId() {
 		return id;
 	}
@@ -171,9 +165,4 @@ public class Cargo {
 	public void setPermitidoProgredirTarefa(boolean permitidoProgredirTarefa) {
 		this.permitidoProgredirTarefa = permitidoProgredirTarefa;
 	}
-
-	public List<Funcionario> getFuncionarios() {
-		return funcionarios;
-	}
-	
 }

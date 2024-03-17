@@ -4,76 +4,65 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import org.springframework.data.domain.Example;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.trabalho.sad.model.entities.Tarefa;
-import com.trabalho.sad.model.entities.status.SituacaoServico;
 import com.trabalho.sad.model.repository.TarefaRepository;
 import com.trabalho.sad.service.TarefaService;
 
 @Service
 public class TarefaServiceImpl implements TarefaService{
 	
-		/* Acesso aos métodos de persistência JPA para tarefas
-		 * */
+	@Autowired
 	private TarefaRepository tarefaRepository;
 	
-	/* Construtor 
-	 ***************************************************************************************************/
-	public TarefaServiceImpl(TarefaRepository tarefaRepo) {
-		this.tarefaRepository = tarefaRepo;
-	}
 
-	
-	/* Métodos 
-	 ***************************************************************************************************/
 	@Override
 	@Transactional
 	public Tarefa cadastrar(Tarefa tarefaParam) {	
-			/* Verifica que o parâmetro recebido não é nulo
-			 * */
 		Objects.requireNonNull(tarefaParam.getId());
 		return tarefaRepository.save(tarefaParam);
 	}
 
 	@Override
 	@Transactional
-	public Tarefa atualizar(Tarefa tarefaParam) {
-			/* Verifica que o parâmetro recebido não é nulo
-			 * */
-		Objects.requireNonNull(tarefaParam.getId());
-		return tarefaRepository.save(tarefaParam);
+	public Tarefa atualizar(Long id, Tarefa obj) {
+		Tarefa entity = tarefaRepository.getReferenceById(id);
+		atualizarDados(entity, obj);
+		Objects.requireNonNull(entity.getId());
+		return tarefaRepository.save(entity);
 	}
 
-		/* Tarefas não serão deletadas. Ao invés disto, a situação da tarefa é 
-		 * marcada como 'Inativa' 
-		 * */
+	public Tarefa atualizarDados(Tarefa entity, Tarefa obj) {
+		entity.setNome(obj.getNome());
+		entity.setDescricao(obj.getDescricao());
+		entity.setDataCriacao(obj.getDataCriacao());
+		entity.setDataPrevistaConclusao(obj.getDataPrevistaConclusao());
+		entity.setDataInicio(obj.getDataInicio());
+		entity.setDataConclusao(obj.getDataConclusao());
+		entity.setTaxaProgresso(obj.getTaxaProgresso());		
+		return(entity);
+	}
+	
 	@Override
 	@Transactional
 	public Tarefa inativar(Tarefa tarefaParam) {
-			/* Para inativar, a situação da tarefa deve ser 'Inativa'.
-			 * */
-		tarefaParam.setSituacao(SituacaoServico.INATIVA.toString());
 		return tarefaRepository.save(tarefaParam);
 	}
 
 	@Override
 	@Transactional
-	public List<Tarefa> buscar(Tarefa tarefaParamFiltro) {	
-			/* Verifica que o parâmetro recebido não é nulo
-			 * */
-		Objects.requireNonNull(tarefaParamFiltro.getId());
-		Example<Tarefa> exampleTarefa = Example.of(tarefaParamFiltro);
-		return tarefaRepository.findAll(exampleTarefa);
+	public List<Tarefa> buscar() {	
+		return tarefaRepository.findAll();
 	}
-
-
+	
 	@Override
 	@Transactional
-	public Optional<Tarefa> consultarPorId(Long id) {
-		return tarefaRepository.findById(id);
+	public Tarefa consultarPorId(Long id) {
+		Optional<Tarefa> obj = tarefaRepository.findById(id);
+		return obj.get();
 	}
 
 }

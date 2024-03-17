@@ -2,10 +2,11 @@ package com.trabalho.sad.api.dto;
 
 import java.time.LocalDate;
 
+import com.trabalho.sad.model.entities.Funcionario;
+import com.trabalho.sad.model.entities.Meta;
+
 public class TarefaDTO {
 	
-	/* Atributos 
-	 ***************************************************************************************************/
 	private Long id;
 	private String nome;
 	private String descricao;
@@ -14,18 +15,11 @@ public class TarefaDTO {
 	private LocalDate dataInicio;
 	private LocalDate dataConclusao;
 	private double taxaProgresso;
-	private String situacao;
+	private Funcionario supervisor;
+	private Funcionario servidor;
+	private Meta meta;
 	
 	
-	/* Construtor 
-	 ***************************************************************************************************/
-	public TarefaDTO() {
-		super();
-	}
-	
-	
-	/* Getters e Setters 
-	 ***************************************************************************************************/
 	public Long getId() {
 		return id;
 	}
@@ -74,13 +68,22 @@ public class TarefaDTO {
 	public void setTaxaProgresso(double taxaProgresso) {
 		this.taxaProgresso = taxaProgresso;
 	}
-
-	public String getSituacao() {
-		return situacao;
+	public Funcionario getSupervisor() {
+		return supervisor;
 	}
-
-	public void setSituacao(String situacao) {
-		this.situacao = situacao;
+	public void setSupervisor(Funcionario supervisor) {
+		this.supervisor = supervisor;
 	}
-
+	public Funcionario getServidor() {
+		return servidor;
+	}
+	public void setServidor(Funcionario servidor) {
+		this.servidor = servidor;
+	}
+	public Meta getMeta() {
+		return meta;
+	}
+	public void setMeta(Meta meta) {
+		this.meta = meta;
+	}
 }

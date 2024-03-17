@@ -1,6 +1,9 @@
 package com.trabalho.sad.model.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+
+import com.trabalho.sad.model.entities.enums.SituacaoTarefa;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,10 +16,9 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tarefa")
-public class Tarefa {
+public class Tarefa implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
-	/* Atributos 
-	 ***************************************************************************************************/
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,30 +45,29 @@ public class Tarefa {
 	@Column(name = "taxaProgresso", nullable = false)
 	private double taxaProgresso;
 	
-	@Column(name = "situacao", nullable=false)
-	private String situacao;
+	@Column(name = "situacaoTarefa")
+	private String situacaoTarefa;
 	
-	/* Atributos - Mapping
-	 ***************************************************************************************************/
 	@ManyToOne
-	@JoinColumn(name = "meta_id", nullable=false)
+	@JoinColumn(name = "supervisor_id")
+	private Funcionario supervisor;
+	
+	@ManyToOne
+	@JoinColumn(name = "servidor_id")
+	private Funcionario servidor;
+	
+	@ManyToOne
+	@JoinColumn(name = "meta_id")
 	private Meta meta;
 	
-	@ManyToOne
-	@JoinColumn(name = "funcionarioAlocado_id")
-	private Funcionario funcionarioAlocado;
-	
-	@ManyToOne
-	@JoinColumn(name = "funcionarioResponsavel_id", nullable = false)
-	private Funcionario funcionarioResponsavel;
+	public Tarefa() {		
+	}
 	
 	
-	/* Construtor 
-	 ***************************************************************************************************/
-	public Tarefa(Long id, String nome, String descricao, LocalDate dataCriacao, LocalDate dataPrevistaConclusao,
-			LocalDate dataInicio, LocalDate dataConclusao, double taxaProgresso, String situacao) {
+	public Tarefa(String nome, String descricao, LocalDate dataCriacao, LocalDate dataPrevistaConclusao,
+			LocalDate dataInicio, LocalDate dataConclusao, double taxaProgresso, SituacaoTarefa sistuacaoTarefa, Funcionario supervisor, Funcionario servidor,
+			Meta meta) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.dataCriacao = dataCriacao;
@@ -74,49 +75,40 @@ public class Tarefa {
 		this.dataInicio = dataInicio;
 		this.dataConclusao = dataConclusao;
 		this.taxaProgresso = taxaProgresso;
-		this.situacao = situacao;
-	}
-	
-	public Tarefa() {
-		super();
+		setSituacaoTarefa(sistuacaoTarefa);
+		this.supervisor = supervisor;
+		this.servidor = servidor;
+		this.meta = meta;
 	}
 
-	/* Getters e Setters 
-	 ***************************************************************************************************/
+
 	public Long getId() {
 		return id;
 	}
-
 
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-
 	public String getNome() {
 		return nome;
 	}
-
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-
 	public String getDescricao() {
 		return descricao;
 	}
-
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
 
-
 	public LocalDate getDataCriacao() {
 		return dataCriacao;
 	}
-
 
 	public void setDataCriacao(LocalDate dataCriacao) {
 		this.dataCriacao = dataCriacao;
@@ -127,11 +119,52 @@ public class Tarefa {
 		return dataPrevistaConclusao;
 	}
 
-
 	public void setDataPrevistaConclusao(LocalDate dataPrevistaConclusao) {
 		this.dataPrevistaConclusao = dataPrevistaConclusao;
 	}
 
+	public double getTaxaProgresso() {
+		return taxaProgresso;
+	}
+
+	public void setTaxaProgresso(double taxaProgresso) {
+		this.taxaProgresso = taxaProgresso;
+	}
+	
+	public SituacaoTarefa getSituacaoTarefa() {
+		return SituacaoTarefa.valueOf(situacaoTarefa);
+	}
+
+	public void setSituacaoTarefa(SituacaoTarefa situacaoTarefa) {
+		if (situacaoTarefa != null) {
+			this.situacaoTarefa = situacaoTarefa.getCode();
+		}
+	}
+
+
+	public Funcionario getSupervisor() {
+		return supervisor;
+	}
+
+	public void setSupervisor(Funcionario supervisor) {
+		this.supervisor = supervisor;
+	}
+
+	public Funcionario getServidor() {
+		return servidor;
+	}
+
+	public void setServidor(Funcionario servidor) {
+		this.servidor = servidor;
+	}
+
+	public Meta getMeta() {
+		return meta;
+	}
+
+	public void setMeta(Meta meta) {
+		this.meta = meta;
+	}
 
 	public LocalDate getDataInicio() {
 		return dataInicio;
@@ -153,33 +186,7 @@ public class Tarefa {
 	}
 
 
-	public double getTaxaProgresso() {
-		return taxaProgresso;
+	public void setSituacaoTarefa(String situacaoTarefa) {
+		this.situacaoTarefa = situacaoTarefa;
 	}
-
-
-	public void setTaxaProgresso(double taxaProgresso) {
-		this.taxaProgresso = taxaProgresso;
-	}
-
-	public String getSituacao() {
-		return situacao;
-	}
-
-	public void setSituacao(String situacao) {
-		this.situacao = situacao;
-	}
-
-	public Meta getMeta() {
-		return meta;
-	}
-
-	public Funcionario getFuncionarioAlocado() {
-		return funcionarioAlocado;
-	}
-
-	public Funcionario getFuncionarioResponsavel() {
-		return funcionarioResponsavel;
-	}
-
 }

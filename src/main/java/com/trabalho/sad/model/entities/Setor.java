@@ -1,7 +1,11 @@
 package com.trabalho.sad.model.entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,15 +19,13 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "setor")
-public class Setor {
+public class Setor implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
-	/* Atributos 
-	 ***************************************************************************************************/
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	@Column(name = "nome", nullable = false)
 	private String nome;
 	
@@ -33,44 +35,34 @@ public class Setor {
 	@Column(name = "ramal", nullable = false)
 	private Long ramal;
 	
-	/* Atributos - Mapping
-	 ***************************************************************************************************/
-	@OneToMany(mappedBy = "setorParticipa")
-	private List<Funcionario> funcionarios = new ArrayList<>();
-	
 	@OneToOne
-	@JoinColumn(name="supervisor_id", referencedColumnName = "id")
+	@JsonIgnoreProperties("setor")
+	@JoinColumn(name = "supervisor_id")
 	private Funcionario supervisor;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "setor")
-	private List<Meta> metas  = new ArrayList<>();
+	private List<Funcionario> funcionarios = new ArrayList<>();
 	
 
-	/* Construtor 
-	 ***************************************************************************************************/
-	public Setor(Long id, String nome, String localizacao, Long ramal) {
+	public Setor() {
+	}
+	
+	public Setor(String nome, String localizacao, Long ramal, Funcionario supervisor) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.localizacao = localizacao;
 		this.ramal = ramal;
-	}
-	
-	public Setor() {
-		super();
+		this.supervisor = supervisor;
 	}
 
-	/* Getters e Setters 
-	 ***************************************************************************************************/
 	public Long getId() {
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public String getNome() {
 		return nome;
@@ -86,31 +78,23 @@ public class Setor {
 		return localizacao;
 	}
 
-
 	public void setLocalizacao(String localizacao) {
 		this.localizacao = localizacao;
 	}
-
 
 	public Long getRamal() {
 		return ramal;
 	}
 
-
 	public void setRamal(Long ramal) {
 		this.ramal = ramal;
 	}
-
-	public List<Funcionario> getFuncionarios() {
-		return funcionarios;
-	}
-
+	
 	public Funcionario getSupervisor() {
 		return supervisor;
 	}
 
-	public List<Meta> getMetas() {
-		return metas;
+	public void setSupervisor(Funcionario supervisor) {
+		this.supervisor = supervisor;
 	}
-	
 }

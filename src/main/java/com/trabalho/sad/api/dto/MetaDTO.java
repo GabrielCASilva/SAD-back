@@ -3,27 +3,14 @@ package com.trabalho.sad.api.dto;
 import java.time.LocalDate;
 
 public class MetaDTO {
-	
-	/* Atributos 
-	 ***************************************************************************************************/
-	private Long id;
+
+	private Long id;	
 	private String nome;
 	private String descricao;
 	private LocalDate dataCriacao;
 	private LocalDate dataPrevistaConclusao;
 	private LocalDate dataConclusao;
-	private String situacao;
-	
-	
-	/* Construtor 
-	 ***************************************************************************************************/
-	public MetaDTO() {
-		super();
-	}
-	
-	
-	/* Getters e Setters 
-	 ***************************************************************************************************/
+	private Integer situacaoMeta;
 	public Long getId() {
 		return id;
 	}
@@ -60,13 +47,10 @@ public class MetaDTO {
 	public void setDataConclusao(LocalDate dataConclusao) {
 		this.dataConclusao = dataConclusao;
 	}
-
-	public String getSituacao() {
-		return situacao;
+	public Integer getSituacaoMeta() {
+		return situacaoMeta;
 	}
-
-	public void setSituacao(String situacao) {
-		this.situacao = situacao;
-	}
-	
+	public void setSituacaoMeta(Integer situacaoMeta) {
+		this.situacaoMeta = situacaoMeta;
+	}	
 }
