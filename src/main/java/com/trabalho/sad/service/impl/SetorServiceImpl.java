@@ -17,26 +17,29 @@ import com.trabalho.sad.model.repository.SetorRepository;
 import com.trabalho.sad.service.SetorService;
 
 @Service
-public class SetorServiceImpl implements SetorService{
-	
-		/* Acesso aos métodos de persistência JPA para setores
-		 * */
+public class SetorServiceImpl implements SetorService {
+
+	/*
+	 * Acesso aos métodos de persistência JPA para setores
+	 */
 	private SetorRepository setorRepository;
-	
-	/* Construtor 
+
+	/*
+	 * Construtor
 	 ***************************************************************************************************/
 	public SetorServiceImpl(SetorRepository setorRepo) {
 		this.setorRepository = setorRepo;
 	}
 
-
-	/* Métodos 
+	/*
+	 * Métodos
 	 ***************************************************************************************************/
 	@Override
 	@Transactional
 	public Setor cadastrar(Setor setorParam) {
-			/* Verifica que o parâmetro recebido não é nulo
-			 * */
+		/*
+		 * Verifica que o parâmetro recebido não é nulo
+		 */
 		Objects.requireNonNull(setorParam.getId());
 		return setorRepository.save(setorParam);
 	}
@@ -44,8 +47,9 @@ public class SetorServiceImpl implements SetorService{
 	@Override
 	@Transactional
 	public Setor atualizar(Setor setorParam) {
-			/* Verifica que o parâmetro recebido não é nulo
-			 * */
+		/*
+		 * Verifica que o parâmetro recebido não é nulo
+		 */
 		Objects.requireNonNull(setorParam.getId());
 		return setorRepository.save(setorParam);
 	}
@@ -53,22 +57,23 @@ public class SetorServiceImpl implements SetorService{
 	@Override
 	@Transactional
 	public void deletar(Setor setorParam) {
-			/* Verifica que o parâmetro recebido não é nulo
-			 * */
+		/*
+		 * Verifica que o parâmetro recebido não é nulo
+		 */
 		Objects.requireNonNull(setorParam.getId());
 		setorRepository.delete(setorParam);
 	}
-	
+
 	@Override
 	@Transactional
 	public List<Setor> buscar(Setor setorParamFiltro) {
-			/* Verifica que o parâmetro recebido não é nulo
-			 * */
+		/*
+		 * Verifica que o parâmetro recebido não é nulo
+		 */
 		Objects.requireNonNull(setorParamFiltro.getId());
 		Example<Setor> exampleSetor = Example.of(setorParamFiltro);
 		return setorRepository.findAll(exampleSetor);
 	}
-
 
 	@Override
 	@Transactional
@@ -78,9 +83,10 @@ public class SetorServiceImpl implements SetorService{
 
 	@Override
 	@Transactional
-	public List<SetorDTO> findAll() {	
-			/* Verifica que o parâmetro recebido não é nulo
-			* */
+	public List<SetorDTO> findAll() {
+		/*
+		 * Verifica que o parâmetro recebido não é nulo
+		 */
 		List<Setor> setores = setorRepository.findAll();
 		List<SetorDTO> setorDTO = setores.stream()
 				.map(SetorDTO::new)
