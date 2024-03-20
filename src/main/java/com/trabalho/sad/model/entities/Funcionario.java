@@ -14,84 +14,89 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import com.trabalho.sad.model.entities.Tarefa;
+import com.trabalho.sad.service.impl.MetricaAgilidadeService;
+import com.trabalho.sad.service.impl.MetricaProdutividadeService;
 
 @Entity
 @Table(name = "funcionario")
 public class Funcionario {
-	
-	/* Atributos 
+
+	/*
+	 * Atributos
 	 ***************************************************************************************************/
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(name = "nome", nullable = false)
 	private String nome;
-	
+
 	@Column(name = "dataNascimento", nullable = false)
 	private LocalDate dataNascimento;
-	
+
 	@Column(name = "sexo", nullable = false)
 	private char sexo;
-	
+
 	@Column(name = "cpf", nullable = false)
 	private Long cpf;
-	
+
 	@Column(name = "cep", nullable = false)
 	private Long cep;
-	
+
 	@Column(name = "endereco", nullable = false)
 	private String endereco;
-	
+
 	@Column(name = "telefone", nullable = false)
 	private Long telefone;
-	
+
 	@Column(name = "foto")
 	private String foto;
-	
+
 	@Column(name = "email", nullable = false)
 	private String email;
-	
+
 	@Column(name = "dataCadastro", nullable = false)
 	private LocalDate dataCadastro;
-	
+
 	@Column(name = "login", nullable = false)
 	private String login;
-	
+
 	@Column(name = "senhaHash", nullable = false)
 	private String senhaHash;
-	
-	@Column(name = "situacao", nullable=false)
+
+	@Column(name = "situacao", nullable = false)
 	private String situacao;
-	
-	/* Atributos - Mapping
+
+	/*
+	 * Atributos - Mapping
 	 ***************************************************************************************************/
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "cargo_id")
 	private Cargo cargo;
-	
+
 	@ManyToOne(optional = true)
 	@JoinColumn(name = "setorParticipa_id")
 	private Setor setorParticipa;
-	
+
 	@OneToOne(mappedBy = "supervisor")
 	private Setor setorSupervisionado;
-	
+
 	@OneToMany(mappedBy = "responsavel")
 	private List<Meta> metasResponsavel = new ArrayList<>();
-	
+
 	@OneToMany(mappedBy = "funcionarioAlocado")
 	private List<Tarefa> tarefasAlocado = new ArrayList<>();
-	
+
 	@OneToMany(mappedBy = "funcionarioResponsavel")
 	private List<Tarefa> tarefasResponsavel = new ArrayList<>();
 
-	
-	/* Construtor 
+	/*
+	 * Construtor
 	 ***************************************************************************************************/
 	public Funcionario(Long id, String nome, LocalDate dataNascimento, char sexo, Long cpf, Long cep, String endereco,
-			Long telefone, String foto, String email, LocalDate dataCadastro, String login, String senhaHash, 
+			Long telefone, String foto, String email, LocalDate dataCadastro, String login, String senhaHash,
 			String situacao) {
 		super();
 		this.id = id;
@@ -114,87 +119,82 @@ public class Funcionario {
 		super();
 	}
 
-	/* Getters e Setters 
+	public double calcularMetricaProdutividade() {
+		MetricaProdutividadeService metricaProdutividadeService = new MetricaProdutividadeService();
+		return metricaProdutividadeService.calcularMetricaProdutividade(tarefasAlocado);
+	}
+
+	public double calcularMetricaAgilidade() {
+		MetricaAgilidadeService metricaAgilidadeService = new MetricaAgilidadeService();
+		return metricaAgilidadeService.calcularMetricaAgilidade(tarefasAlocado);
+	}
+
+	/*
+	 * Getters e Setters
 	 ***************************************************************************************************/
 	public Long getId() {
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public String getNome() {
 		return nome;
 	}
 
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
-
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-
 
 	public char getSexo() {
 		return sexo;
 	}
 
-
 	public void setSexo(char sexo) {
 		this.sexo = sexo;
 	}
-
 
 	public Long getCpf() {
 		return cpf;
 	}
 
-
 	public void setCpf(Long cpf) {
 		this.cpf = cpf;
 	}
-
 
 	public Long getCep() {
 		return cep;
 	}
 
-
 	public void setCep(Long cep) {
 		this.cep = cep;
 	}
-
 
 	public String getEndereco() {
 		return endereco;
 	}
 
-
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-
 
 	public Long getTelefone() {
 		return telefone;
 	}
 
-
 	public void setTelefone(Long telefone) {
 		this.telefone = telefone;
 	}
-
 
 	public String getFoto() {
 		return foto;
@@ -208,16 +208,13 @@ public class Funcionario {
 		return email;
 	}
 
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-
 	public LocalDate getDataCadastro() {
 		return dataCadastro;
 	}
-
 
 	public void setDataCadastro(LocalDate dataCadastro) {
 		this.dataCadastro = dataCadastro;
@@ -227,16 +224,13 @@ public class Funcionario {
 		return login;
 	}
 
-
 	public void setLogin(String login) {
 		this.login = login;
 	}
 
-
 	public String getSenhaHash() {
 		return senhaHash;
 	}
-
 
 	public void setSenhaHash(String senhaHash) {
 		this.senhaHash = senhaHash;
@@ -273,5 +267,5 @@ public class Funcionario {
 	public List<Tarefa> getTarefasResponsavel() {
 		return tarefasResponsavel;
 	}
-	
+
 }
