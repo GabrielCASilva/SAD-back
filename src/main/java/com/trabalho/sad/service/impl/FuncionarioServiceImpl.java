@@ -47,6 +47,7 @@ public class FuncionarioServiceImpl implements FuncionarioService{
 		entity.setDataCadastro(obj.getDataCadastro());
 		entity.setLogin(obj.getLogin());
 		entity.setSenhaHash(obj.getSenhaHash()); 
+		entity.setSituacao(obj.getSituacao());
 		return(entity);
 	}
 

@@ -11,6 +11,8 @@ import com.trabalho.sad.model.entities.enums.SituacaoFuncionario;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -65,7 +67,9 @@ public class Funcionario implements Serializable {
 	@Column(name = "senhaHash", nullable = false)
 	private String senhaHash; 
 
-	private String situacaoFuncionario;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "situacao", nullable = false)
+	private SituacaoFuncionario situacao;
 
 	@ManyToOne
 	@JsonIgnoreProperties("funcionarios")
@@ -91,7 +95,7 @@ public class Funcionario implements Serializable {
 	public Funcionario() {
 	}
 
-	public Funcionario(String nome, LocalDate dataNascimento, char sexo, Long cpf, Long cep, String endereco, Long telefone, String foto, String email, LocalDate dataCadastro, String login, String senhaHash, SituacaoFuncionario situacaoFuncionario, Setor setor, Cargo cargo) {
+	public Funcionario(String nome, LocalDate dataNascimento, char sexo, Long cpf, Long cep, String endereco, Long telefone, String foto, String email, LocalDate dataCadastro, String login, String senhaHash, SituacaoFuncionario situacao, Setor setor, Cargo cargo) {
 		super();
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
@@ -105,7 +109,7 @@ public class Funcionario implements Serializable {
 		this.dataCadastro = dataCadastro;
 		this.login = login;
 		this.senhaHash = senhaHash; 
-		setSituacaoFuncionario(situacaoFuncionario);
+		this.situacao = situacao;
 		this.setor = setor;
 		this.cargo = cargo;
 	}
@@ -179,16 +183,15 @@ public class Funcionario implements Serializable {
 	}
 
 	
-	public SituacaoFuncionario getSituacaoFuncionario() {
-		return SituacaoFuncionario.valueOf(situacaoFuncionario);
+	public SituacaoFuncionario getSituacao() {
+		return situacao;
 	}
 
-	public void setSituacaoFuncionario(SituacaoFuncionario situacaoFuncionario) {
-		if (situacaoFuncionario != null) {
-			this.situacaoFuncionario = situacaoFuncionario.getCode();
+	public void setSituacao(SituacaoFuncionario situacao) {
+		if (situacao != null) {
+			this.situacao = situacao;
 		}
 	}
-
 
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
@@ -242,8 +245,28 @@ public class Funcionario implements Serializable {
 		this.senhaHash = senhaHash;
 	}
 
-	public void setSituacaoFuncionario(String situacaoFuncionario) {
-		this.situacaoFuncionario = situacaoFuncionario;
+	public List<Meta> getMetas() {
+		return metas;
 	}
-	
+
+	public void setMetas(List<Meta> metas) {
+		this.metas = metas;
+	}
+
+	public List<Tarefa> getTarefasSupervisor() {
+		return tarefasSupervisor;
+	}
+
+	public void setTarefasSupervisor(List<Tarefa> tarefasSupervisor) {
+		this.tarefasSupervisor = tarefasSupervisor;
+	}
+
+	public List<Tarefa> getTarefasServidor() {
+		return tarefasServidor;
+	}
+
+	public void setTarefasServidor(List<Tarefa> tarefasServidor) {
+		this.tarefasServidor = tarefasServidor;
+	}
+
 }

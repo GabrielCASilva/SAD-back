@@ -1,10 +1,12 @@
 package com.trabalho.sad.api.dto;
 
+import com.trabalho.sad.model.entities.enums.CategoriaAvaliacao;
+
 public class CargoDTO {
 
 	private Long id;
 	private String nome;
-	private String tipoAvaliacao;	
+	private CategoriaAvaliacao tipoAvaliacao;	
 	private boolean permitidoManterMeta;	
 	private boolean permitidoAvaliacaoServidor;	
 	private boolean permitidoAvaliacaoSupervisor;	
@@ -27,10 +29,10 @@ public class CargoDTO {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getTipoAvaliacao() {
+	public CategoriaAvaliacao getTipoAvaliacao() {
 		return tipoAvaliacao;
 	}
-	public void setTipoAvaliacao(String tipoAvaliacao) {
+	public void setTipoAvaliacao(CategoriaAvaliacao tipoAvaliacao) {
 		this.tipoAvaliacao = tipoAvaliacao;
 	}
 	public boolean isPermitidoManterMeta() {

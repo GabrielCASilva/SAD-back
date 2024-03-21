@@ -1,8 +1,9 @@
 package com.trabalho.sad.model.entities.enums;
 
-public enum SituacaoFuncionario {
+public enum SituacaoServico {
 
 	ATIVO,
 	INATIVO,
-	EM_LICENÇA;
+	EM_ANDAMENTO,
+	CONCLUÍDO;
 }

@@ -33,6 +33,7 @@ public class MetaController {
 		meta.setDataCriacao(dto.getDataCriacao());
 		meta.setDataPrevistaConclusao(dto.getDataPrevistaConclusao());
 		meta.setDataConclusao(dto.getDataConclusao());
+		meta.setSituacao(dto.getSituacao());
 		return meta;
 	}
 

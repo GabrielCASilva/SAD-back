@@ -3,10 +3,12 @@ package com.trabalho.sad.model.entities;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-import com.trabalho.sad.model.entities.enums.SituacaoTarefa;
+import com.trabalho.sad.model.entities.enums.SituacaoServico;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -45,8 +47,9 @@ public class Tarefa implements Serializable {
 	@Column(name = "taxaProgresso", nullable = false)
 	private double taxaProgresso;
 	
-	@Column(name = "situacaoTarefa")
-	private String situacaoTarefa;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "situacao", nullable = false)
+	private SituacaoServico situacao;
 	
 	@ManyToOne
 	@JoinColumn(name = "supervisor_id")
@@ -65,7 +68,7 @@ public class Tarefa implements Serializable {
 	
 	
 	public Tarefa(String nome, String descricao, LocalDate dataCriacao, LocalDate dataPrevistaConclusao,
-			LocalDate dataInicio, LocalDate dataConclusao, double taxaProgresso, SituacaoTarefa sistuacaoTarefa, Funcionario supervisor, Funcionario servidor,
+			LocalDate dataInicio, LocalDate dataConclusao, double taxaProgresso, SituacaoServico situacao, Funcionario supervisor, Funcionario servidor,
 			Meta meta) {
 		super();
 		this.nome = nome;
@@ -75,7 +78,7 @@ public class Tarefa implements Serializable {
 		this.dataInicio = dataInicio;
 		this.dataConclusao = dataConclusao;
 		this.taxaProgresso = taxaProgresso;
-		setSituacaoTarefa(sistuacaoTarefa);
+		this.situacao = situacao;
 		this.supervisor = supervisor;
 		this.servidor = servidor;
 		this.meta = meta;
@@ -131,13 +134,13 @@ public class Tarefa implements Serializable {
 		this.taxaProgresso = taxaProgresso;
 	}
 	
-	public SituacaoTarefa getSituacaoTarefa() {
-		return SituacaoTarefa.valueOf(situacaoTarefa);
+	public SituacaoServico getSituacao() {
+		return situacao;
 	}
 
-	public void setSituacaoTarefa(SituacaoTarefa situacaoTarefa) {
-		if (situacaoTarefa != null) {
-			this.situacaoTarefa = situacaoTarefa.getCode();
+	public void setSituacao(SituacaoServico situacao) {
+		if (situacao != null) {
+			this.situacao = situacao;
 		}
 	}
 
@@ -183,10 +186,5 @@ public class Tarefa implements Serializable {
 
 	public void setDataConclusao(LocalDate dataConclusao) {
 		this.dataConclusao = dataConclusao;
-	}
-
-
-	public void setSituacaoTarefa(String situacaoTarefa) {
-		this.situacaoTarefa = situacaoTarefa;
 	}
 }

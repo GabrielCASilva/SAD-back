@@ -2,6 +2,8 @@ package com.trabalho.sad.api.dto;
 
 import java.time.LocalDate;
 
+import com.trabalho.sad.model.entities.enums.SituacaoServico;
+
 public class MetaDTO {
 
 	private Long id;	
@@ -10,7 +12,7 @@ public class MetaDTO {
 	private LocalDate dataCriacao;
 	private LocalDate dataPrevistaConclusao;
 	private LocalDate dataConclusao;
-	private Integer situacaoMeta;
+	private SituacaoServico situacao;
 	public Long getId() {
 		return id;
 	}
@@ -47,10 +49,10 @@ public class MetaDTO {
 	public void setDataConclusao(LocalDate dataConclusao) {
 		this.dataConclusao = dataConclusao;
 	}
-	public Integer getSituacaoMeta() {
-		return situacaoMeta;
+	public SituacaoServico getSituacao() {
+		return situacao;
 	}
-	public void setSituacaoMeta(Integer situacaoMeta) {
-		this.situacaoMeta = situacaoMeta;
+	public void setSituacao(SituacaoServico situacao) {
+		this.situacao = situacao;
 	}	
 }

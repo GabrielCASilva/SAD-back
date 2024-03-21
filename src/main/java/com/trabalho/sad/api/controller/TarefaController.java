@@ -34,7 +34,8 @@ public class TarefaController {
 		tarefa.setDataPrevistaConclusao(dto.getDataPrevistaConclusao());
 		tarefa.setDataInicio(dto.getDataInicio());
 		tarefa.setDataConclusao(dto.getDataConclusao());
-		tarefa.setTaxaProgresso(dto.getTaxaProgresso());		
+		tarefa.setTaxaProgresso(dto.getTaxaProgresso());
+		tarefa.setSituacao(dto.getSituacao());
 		return tarefa;
 	}
 	

@@ -39,7 +39,8 @@ public class FuncionarioController {
 		funcionario.setEmail(dto.getEmail());
 		funcionario.setDataCadastro(dto.getDataCadastro());
 		funcionario.setLogin(dto.getLogin());
-		funcionario.setSenhaHash(dto.getSenhaHash()); 
+		funcionario.setSenhaHash(dto.getSenhaHash());
+		funcionario.setSituacao(dto.getSituacao());
 		return funcionario;
 	}
 	

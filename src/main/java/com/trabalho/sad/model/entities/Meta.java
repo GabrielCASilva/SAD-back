@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.trabalho.sad.model.entities.enums.SituacaoMeta;
+import com.trabalho.sad.model.entities.enums.SituacaoServico;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -43,8 +45,9 @@ public class Meta implements Serializable {
 	@Column(name = "dataConclusao")
 	private LocalDate dataConclusao;
 	
-	@Column(name = "situacaoMeta")
-	private String situacaoMeta;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "situacao", nullable = false)
+	private SituacaoServico situacao;
 	
 	@ManyToOne
 	@JoinColumn(name = "diretor_id")
@@ -62,14 +65,14 @@ public class Meta implements Serializable {
 	}		
 
 	public Meta(String nome, String descricao, LocalDate dataCriacao, LocalDate dataPrevistaConclusao,
-			LocalDate dataConclusao, SituacaoMeta situacaoMeta, Funcionario diretor, Setor setor) {
+			LocalDate dataConclusao, SituacaoServico situacao, Funcionario diretor, Setor setor) {
 		super();
 		this.nome = nome;
 		this.descricao = descricao;
 		this.dataCriacao = dataCriacao;
 		this.dataPrevistaConclusao = dataPrevistaConclusao;
 		this.dataConclusao = dataConclusao;
-		setSituacaoMeta(situacaoMeta);
+		this.situacao = situacao;
 		this.diretor = diretor;
 		this.setor = setor;
 	}
@@ -124,13 +127,13 @@ public class Meta implements Serializable {
 		this.dataConclusao = dataConclusao;
 	}
 
-	public SituacaoMeta getSituacaoMeta() {
-		return SituacaoMeta.valueOf(situacaoMeta);
+	public SituacaoServico getSituacao() {
+		return situacao;
 	}
 
-	public void setSituacaoMeta(SituacaoMeta situacaoMeta) {
-		if (situacaoMeta != null) {
-			this.situacaoMeta = situacaoMeta.getCode();
+	public void setSituacao(SituacaoServico situacao) {
+		if (situacao != null) {
+			this.situacao = situacao;
 		}
 	}
 

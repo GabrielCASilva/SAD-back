@@ -2,6 +2,8 @@ package com.trabalho.sad.api.dto;
 
 import java.time.LocalDate;
 
+import com.trabalho.sad.model.entities.enums.SituacaoFuncionario;
+
 public class FuncionarioDTO {
 		
 		private Long id;	
@@ -16,7 +18,8 @@ public class FuncionarioDTO {
 		private String email;
 		private LocalDate dataCadastro;
 		private String login;
-		private String senhaHash; 
+		private String senhaHash;
+		private SituacaoFuncionario situacao;
 
 		public Long getId() {
 			return id;
@@ -95,5 +98,11 @@ public class FuncionarioDTO {
 		}
 		public void setSenhaHash(String senhaHash) {
 			this.senhaHash = senhaHash;
+		}
+		public SituacaoFuncionario getSituacao() {
+			return situacao;
+		}
+		public void setSituacao(SituacaoFuncionario situacao) {
+			this.situacao = situacao;
 		}	
 }
