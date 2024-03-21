@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import com.trabalho.sad.service.MetaService;
 
 @RestController
 @RequestMapping(value = "/metas")
+@CrossOrigin(origins = "*")
 public class MetaController {
 
 	@Autowired
@@ -31,10 +33,11 @@ public class MetaController {
 		meta.setDataCriacao(dto.getDataCriacao());
 		meta.setDataPrevistaConclusao(dto.getDataPrevistaConclusao());
 		meta.setDataConclusao(dto.getDataConclusao());
+		meta.setSituacao(dto.getSituacao());
 		return meta;
 	}
 
-	@PostMapping("/salvar{id}")
+	@PostMapping
 	public ResponseEntity<?> cadastrar(@RequestBody MetaDTO dto) {
 		try {
 			Meta obj = converter(dto);

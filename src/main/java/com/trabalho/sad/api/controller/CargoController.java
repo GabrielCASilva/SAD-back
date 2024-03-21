@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import com.trabalho.sad.service.CargoService;
 
 @RestController
 @RequestMapping(value = "/cargos")
+@CrossOrigin(origins = "*")
 public class CargoController {
 
 	@Autowired
@@ -39,7 +41,7 @@ public class CargoController {
 		return cargo;
 	}
 	
-	@PostMapping("/salvar{id}")
+	@PostMapping
 	public ResponseEntity<?> cadastrar(@RequestBody CargoDTO dto) {
 		try {
 			Cargo obj = converter(dto);

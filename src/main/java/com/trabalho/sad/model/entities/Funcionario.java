@@ -11,6 +11,8 @@ import com.trabalho.sad.model.entities.enums.SituacaoFuncionario;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -65,7 +67,9 @@ public class Funcionario implements Serializable {
 	@Column(name = "senhaHash", nullable = false)
 	private String senhaHash; 
 
-	private String situacaoFuncionario;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "situacao", nullable = false)
+	private SituacaoFuncionario situacao;
 
 	@ManyToOne
 	@JsonIgnoreProperties("funcionarios")
@@ -91,7 +95,7 @@ public class Funcionario implements Serializable {
 	public Funcionario() {
 	}
 
-	public Funcionario(String nome, LocalDate dataNascimento, char sexo, Long cpf, Long cep, String endereco, Long telefone, String foto, String email, LocalDate dataCadastro, String login, String senhaHash, SituacaoFuncionario situacaoFuncionario, Setor setor, Cargo cargo) {
+	public Funcionario(String nome, LocalDate dataNascimento, char sexo, Long cpf, Long cep, String endereco, Long telefone, String foto, String email, LocalDate dataCadastro, String login, String senhaHash, SituacaoFuncionario situacao, Setor setor, Cargo cargo) {
 		super();
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
@@ -105,7 +109,7 @@ public class Funcionario implements Serializable {
 		this.dataCadastro = dataCadastro;
 		this.login = login;
 		this.senhaHash = senhaHash; 
-		setSituacaoFuncionario(situacaoFuncionario);
+		this.situacao = situacao;
 		this.setor = setor;
 		this.cargo = cargo;
 	}
@@ -129,6 +133,66 @@ public class Funcionario implements Serializable {
 	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public LocalDate getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(LocalDate dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getSenhaHash() {
+		return senhaHash;
+	}
+
+	public Setor getSetor() {
+		return setor;
+	}
+
+	public void setSetor(Setor setor) {
+		this.setor = setor;
+	}
+
+	public Cargo getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}
+
+	
+	public SituacaoFuncionario getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(SituacaoFuncionario situacao) {
+		if (situacao != null) {
+			this.situacao = situacao;
+		}
+	}
+
 
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
@@ -178,65 +242,7 @@ public class Funcionario implements Serializable {
 		return foto;
 	}
 
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public LocalDate getDataCadastro() {
-		return dataCadastro;
-	}
-
-	public void setDataCadastro(LocalDate dataCadastro) {
-		this.dataCadastro = dataCadastro;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-	public String getSenhaHash() {
-		return senhaHash;
-	}
-
 	public void setSenhaHash(String senhaHash) {
 		this.senhaHash = senhaHash;
-	}
-
-	public Setor getSetor() {
-		return setor;
-	}
-
-	public void setSetor(Setor setor) {
-		this.setor = setor;
-	}
-
-	public Cargo getCargo() {
-		return cargo;
-	}
-
-	public void setCargo(Cargo cargo) {
-		this.cargo = cargo;
-	}
-
-	public SituacaoFuncionario getSituacaoFuncionario() {
-		return SituacaoFuncionario.valueOf(situacaoFuncionario);
-	}
-
-	public void setSituacaoFuncionario(SituacaoFuncionario situacaoFuncionario) {
-		if (situacaoFuncionario != null) {
-			this.situacaoFuncionario = situacaoFuncionario.getCode();
-		}
 	}
 }

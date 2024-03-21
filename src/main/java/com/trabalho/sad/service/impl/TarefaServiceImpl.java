@@ -42,7 +42,8 @@ public class TarefaServiceImpl implements TarefaService{
 		entity.setDataPrevistaConclusao(obj.getDataPrevistaConclusao());
 		entity.setDataInicio(obj.getDataInicio());
 		entity.setDataConclusao(obj.getDataConclusao());
-		entity.setTaxaProgresso(obj.getTaxaProgresso());		
+		entity.setTaxaProgresso(obj.getTaxaProgresso());
+		entity.setSituacao(obj.getSituacao());
 		return(entity);
 	}
 	
@@ -64,5 +65,4 @@ public class TarefaServiceImpl implements TarefaService{
 		Optional<Tarefa> obj = tarefaRepository.findById(id);
 		return obj.get();
 	}
-
 }

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import com.trabalho.sad.model.entities.Funcionario;
 import com.trabalho.sad.model.entities.Meta;
+import com.trabalho.sad.model.entities.enums.SituacaoServico;
 
 public class TarefaDTO {
 	
@@ -15,6 +16,7 @@ public class TarefaDTO {
 	private LocalDate dataInicio;
 	private LocalDate dataConclusao;
 	private double taxaProgresso;
+	private SituacaoServico situacao;
 	private Funcionario supervisor;
 	private Funcionario servidor;
 	private Meta meta;
@@ -86,4 +88,10 @@ public class TarefaDTO {
 	public void setMeta(Meta meta) {
 		this.meta = meta;
 	}
+	public SituacaoServico getSituacao() {
+		return situacao;
+	}
+	public void setSituacao(SituacaoServico situacao) {
+		this.situacao = situacao;
+	}	
 }

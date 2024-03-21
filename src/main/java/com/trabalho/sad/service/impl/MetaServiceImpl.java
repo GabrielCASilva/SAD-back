@@ -41,6 +41,7 @@ public class MetaServiceImpl implements MetaService{
 		entity.setDataCriacao(obj.getDataCriacao());
 		entity.setDataPrevistaConclusao(obj.getDataPrevistaConclusao());
 		entity.setDataConclusao(obj.getDataConclusao());
+		entity.setSituacao(obj.getSituacao());
 		return(entity);
 	}
 	

@@ -5,9 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.trabalho.sad.model.entities.enums.CategoriaAvaliacao;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,8 +30,9 @@ public class Cargo implements Serializable {
 	@Column(name = "nome", nullable = false)
 	private String nome;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(name = "tipoAvaliacao", nullable = false)
-	private String tipoAvaliacao;
+	private CategoriaAvaliacao tipoAvaliacao;
 	
 	@Column(name = "permitidoManterMeta", nullable = false)
 	private boolean permitidoManterMeta;
@@ -62,7 +66,7 @@ public class Cargo implements Serializable {
 	public Cargo() {
 	}
 	
-	public Cargo(String nome, String tipoAvaliacao, boolean permitidoManterMeta,
+	public Cargo(String nome, CategoriaAvaliacao tipoAvaliacao, boolean permitidoManterMeta,
 			boolean permitidoAvaliacaoServidor, boolean permitidoAvaliacaoSupervisor,
 			boolean permitidoManterFuncionario, boolean permitidoManterSetor, boolean permitidoManterTarefa,
 			boolean permitidoAtribuirTarefa, boolean permitidoProgredirTarefa) {
@@ -78,7 +82,6 @@ public class Cargo implements Serializable {
 		this.permitidoAtribuirTarefa = permitidoAtribuirTarefa;
 		this.permitidoProgredirTarefa = permitidoProgredirTarefa;
 	}
-
 	public Long getId() {
 		return id;
 	}
@@ -95,11 +98,11 @@ public class Cargo implements Serializable {
 		this.nome = nome;
 	}
 
-	public String getTipoAvaliacao() {
+	public CategoriaAvaliacao getTipoAvaliacao() {
 		return tipoAvaliacao;
 	}
 
-	public void setTipoAvaliacao(String tipoAvaliacao) {
+	public void setTipoAvaliacao(CategoriaAvaliacao tipoAvaliacao) {
 		this.tipoAvaliacao = tipoAvaliacao;
 	}
 
