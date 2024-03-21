@@ -193,4 +193,80 @@ public class Funcionario implements Serializable {
 		}
 	}
 
+	public void setDataNascimento(LocalDate dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+
+	public char getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(char sexo) {
+		this.sexo = sexo;
+	}
+
+	public Long getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(Long cpf) {
+		this.cpf = cpf;
+	}
+
+	public Long getCep() {
+		return cep;
+	}
+
+	public void setCep(Long cep) {
+		this.cep = cep;
+	}
+
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
+
+	public Long getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(Long telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setSenhaHash(String senhaHash) {
+		this.senhaHash = senhaHash;
+	}
+
+	public List<Meta> getMetas() {
+		return metas;
+	}
+
+	public void setMetas(List<Meta> metas) {
+		this.metas = metas;
+	}
+
+	public List<Tarefa> getTarefasSupervisor() {
+		return tarefasSupervisor;
+	}
+
+	public void setTarefasSupervisor(List<Tarefa> tarefasSupervisor) {
+		this.tarefasSupervisor = tarefasSupervisor;
+	}
+
+	public List<Tarefa> getTarefasServidor() {
+		return tarefasServidor;
+	}
+
+	public void setTarefasServidor(List<Tarefa> tarefasServidor) {
+		this.tarefasServidor = tarefasServidor;
+	}
+
 }
