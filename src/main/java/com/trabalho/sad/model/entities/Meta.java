@@ -152,4 +152,13 @@ public class Meta implements Serializable {
 	public void setSetor(Setor setor) {
 		this.setor = setor;
 	}
+
+	public List<Tarefa> getTarefas() {
+		return tarefas;
+	}
+
+	public void setTarefas(List<Tarefa> tarefas) {
+		this.tarefas = tarefas;
+	}
+	
 }
