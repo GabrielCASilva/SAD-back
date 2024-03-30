@@ -13,7 +13,7 @@ public class ProgressoMeta implements Avaliacao{
 	private double indiceProdutividade;
 	private double indiceAgilidade;
 	private double indiceEficacia;
-	private double tarefasConcluidas;
+	private int tarefasConcluidas;
 	
 	private Meta metaAlvo = null;
 	private List<Tarefa> tarefasAvaliacao = null; 
@@ -126,7 +126,7 @@ public class ProgressoMeta implements Avaliacao{
 			}
 		}
 		/* Produtividade = Quantidade de tarefas concluídas, pelo total de tarefas */
-		this.tarefasConcluidas = tarefasConcluidas;
+		this.tarefasConcluidas = (int) tarefasConcluidas;
 		resultado = tarefasConcluidas / this.tarefasAvaliacao.size();
 		return resultado;
 	}

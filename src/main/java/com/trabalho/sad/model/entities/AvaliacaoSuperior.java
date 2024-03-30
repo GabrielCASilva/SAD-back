@@ -14,7 +14,7 @@ public class AvaliacaoSuperior implements Avaliacao {
 	private double indiceAgilidade;
 	private double indiceEficacia;
 	private double indiceComprometimento;
-	private double tarefasConcluidas;
+	private int tarefasConcluidas;
 	
 	private Funcionario funcionarioAlvo = null;
 	private List<Tarefa> tarefasAvaliacao = null; 
@@ -69,8 +69,8 @@ public class AvaliacaoSuperior implements Avaliacao {
 		variables.put("dataFinalPeriodo", dataFim.format(formatter));
 
 		// Funcionario
-        variables.put("nomeFuncionario", funcionario.getNome());
-        variables.put("identificacaoFuncionario", funcionario.getId().toString());
+    variables.put("nomeFuncionario", funcionario.getNome());
+    variables.put("identificacaoFuncionario", funcionario.getId().toString());
 		variables.put("dataNascimento", funcionario.getDataNascimento().format(formatter));
 		variables.put("sexoFuncionario", String.valueOf(funcionario.getSexo()));
 		variables.put("cpfFuncionario", String.valueOf(funcionario.getCpf()));
@@ -122,7 +122,7 @@ public class AvaliacaoSuperior implements Avaliacao {
 			}
 		}
 		/* Produtividade = Quantidade de tarefas concluídas, pelo total de tarefas */
-		this.tarefasConcluidas = tarefasConcluidas;
+		this.tarefasConcluidas = (int) tarefasConcluidas;
 		resultado = tarefasConcluidas / this.tarefasAvaliacao.size();
 		return resultado;
 	}

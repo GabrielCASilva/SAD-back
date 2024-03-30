@@ -24,21 +24,6 @@ public class Relatorio {
 		wordPackage.save(exportFile);
 	}
 
-    public void substituirVariaveis() throws Exception {
-
-        WordprocessingMLPackage wordDoc = WordprocessingMLPackage.load(new File("relatorio.docx"));
-        MainDocumentPart mainDocPart = wordDoc.getMainDocumentPart();
-
-        HashMap<String, String> variables = new HashMap<>();
-        variables.put("nome", "João");
-        variables.put("nome_2", "Marcos");
-
-        mainDocPart.variableReplace(variables);
-    
-        wordDoc.save(new File("novo_relatorio.docx"));
-        System.out.println("Documento modificado salvo com sucesso!");
-    }
-
     public void gerarRelatorioCompleto(String arquivoEntrada, HashMap<String, String> variables) throws Exception {
         WordprocessingMLPackage wordDoc = WordprocessingMLPackage.load(new File(arquivoEntrada));
         MainDocumentPart mainDocPart = wordDoc.getMainDocumentPart();

@@ -5,14 +5,17 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-@Controller
+@RestController
+@CrossOrigin(origins = "*")
 public class RelatorioController {
 
     @GetMapping("/downloadRelatorio")
@@ -24,7 +27,7 @@ public class RelatorioController {
         InputStreamResource resource = new InputStreamResource(new FileInputStream(relatorio));
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=novo_relatorio.docx");
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=relatorio_completo.docx");
 
         return ResponseEntity.ok()
                 .headers(headers)

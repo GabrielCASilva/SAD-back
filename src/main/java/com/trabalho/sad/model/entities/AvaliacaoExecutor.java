@@ -14,7 +14,7 @@ public class AvaliacaoExecutor implements Avaliacao{
 	private double indiceAgilidade;
 	private double indiceEficacia;
 	private double indiceComprometimento;
-	private double tarefasConcluidas;
+	private int tarefasConcluidas;
 	
 	private Funcionario funcionarioAlvo = null;
 	private List<Tarefa> tarefasAvaliacao = null; 
@@ -122,7 +122,7 @@ public class AvaliacaoExecutor implements Avaliacao{
 			}
 		}
 		/* Produtividade = Quantidade de tarefas concluídas, pelo total de tarefas */
-		this.tarefasConcluidas = tarefasConcluidas;
+		this.tarefasConcluidas = (int) tarefasConcluidas;
 		resultado = tarefasConcluidas / this.tarefasAvaliacao.size();
 		return resultado;
 	}
