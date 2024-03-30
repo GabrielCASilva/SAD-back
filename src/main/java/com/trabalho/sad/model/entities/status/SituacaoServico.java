@@ -4,7 +4,7 @@ public enum SituacaoServico {
 	
 	ATIVA("Ativa"),
 	INATIVA("Inativa"),
-	ANDAMENTO("Em andamento"),
+	EM_ANDAMENTO("Em andamento"),
 	CONCLUIDA("Concluída");
 	
 	private String situacao;

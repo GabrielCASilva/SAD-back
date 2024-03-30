@@ -16,5 +16,4 @@ public enum SituacaoFuncionario {
 	public String toString() {
 		return this.situacao;
 	}
-	
 }

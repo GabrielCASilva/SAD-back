@@ -17,6 +17,7 @@ import com.trabalho.sad.api.dto.FuncionarioDTO;
 import com.trabalho.sad.exceptions.RegraNegocioException;
 import com.trabalho.sad.model.entities.Funcionario;
 import com.trabalho.sad.service.FuncionarioService;
+import com.trabalho.sad.service.TarefaService;
 
 @RestController
 @RequestMapping(value = "/funcionarios")
@@ -25,6 +26,8 @@ public class FuncionarioController {
 
 	@Autowired
 	FuncionarioService funcionarioService;
+	@Autowired
+	TarefaService tarefaService;
 
 	private Funcionario converter(FuncionarioDTO dto) {		
 		Funcionario funcionario = new Funcionario();	

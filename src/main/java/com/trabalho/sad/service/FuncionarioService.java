@@ -14,5 +14,5 @@ public interface FuncionarioService {
 	
 	List<Funcionario> buscar();
 	
-	Funcionario consultarPorId(Long id);
+	Funcionario consultarPorId(Long id);	
 }

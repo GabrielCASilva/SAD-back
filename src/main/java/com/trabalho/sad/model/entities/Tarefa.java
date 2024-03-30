@@ -38,7 +38,7 @@ public class Tarefa implements Serializable {
 	@Column(name = "dataPrevistaConclusao", nullable = false)
 	private LocalDate dataPrevistaConclusao;
 	
-	@Column(name = "datainicio")
+	@Column(name = "dataInicio")
 	private LocalDate dataInicio;
 	
 	@Column(name = "dataConclusao")

@@ -1,5 +1,6 @@
 package com.trabalho.sad.service.impl;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.trabalho.sad.model.entities.Funcionario;
+import com.trabalho.sad.model.entities.Meta;
 import com.trabalho.sad.model.entities.Tarefa;
 import com.trabalho.sad.model.repository.TarefaRepository;
 import com.trabalho.sad.service.TarefaService;
@@ -65,4 +68,22 @@ public class TarefaServiceImpl implements TarefaService{
 		Optional<Tarefa> obj = tarefaRepository.findById(id);
 		return obj.get();
 	}
+
+	@Override
+	@Transactional
+    public List<Tarefa> obterTarefasServidorPorPeriodo(Funcionario servidor, LocalDate dataInicio, LocalDate dataFim) {
+        return tarefaRepository.findByFuncionarioServidorAndPeriodo(servidor, dataInicio, dataFim);
+    }
+	
+	@Override
+	@Transactional
+    public List<Tarefa> obterTarefasSupervisorPorPeriodo(Funcionario supervisor, LocalDate dataInicio, LocalDate dataFim) {
+        return tarefaRepository.findByFuncionarioSupervisorAndPeriodo(supervisor, dataInicio, dataFim);
+    }
+	
+	@Override
+	@Transactional
+    public List<Tarefa> obterTarefasDaMetaNoPeriodo(Meta meta, LocalDate dataInicio, LocalDate dataFim) {
+        return tarefaRepository.findByTarefasDaMetaNoPeriodo(meta, dataInicio, dataFim);
+    }
 }
