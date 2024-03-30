@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.trabalho.sad.SadApplication;
+import com.trabalho.sad.model.entities.Relatorio;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -18,25 +18,27 @@ import java.io.IOException;
 public class RelatorioController {
 
     @GetMapping("/gerarRelatorio")
-    public String gerarRelatorio() {
+    public ResponseEntity<?> gerarRelatorio() {
         try {
-            SadApplication.gerarRelatorio();
+            Relatorio relatorio = new Relatorio();
+            relatorio.gerarRelatorio();
+            relatorio.substituirVariaveis();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "redirect:/downloadRelatorio";
+        return ResponseEntity.ok().body(null);
     }
 
     @GetMapping("/downloadRelatorio")
     @ResponseBody
     public ResponseEntity<InputStreamResource> downloadRelatorio() throws IOException {
 
-        File relatorio = new File("relatorio.docx");
+        File relatorio = new File("novo_relatorio.docx");
 
         InputStreamResource resource = new InputStreamResource(new FileInputStream(relatorio));
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=relatorio.docx");
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=novo_relatorio.docx");
 
         return ResponseEntity.ok()
                 .headers(headers)

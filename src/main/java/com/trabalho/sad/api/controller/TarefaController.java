@@ -96,6 +96,8 @@ public class TarefaController {
 
 		AvaliacaoExecutor avaliacao = new AvaliacaoExecutor(servidor, tarefas);
 		avaliacao.calcularAvaliacao();
+		avaliacao.gerarRelatorio(servidor, dataInicio, dataFim);
+
 		AvaliacaoDTO avaliacaoDTO = new AvaliacaoDTO(avaliacao.getIndiceProdutividade(), 
 			avaliacao.getIndiceAgilidade(), avaliacao.getIndiceEficacia(), avaliacao.getIndiceComprometimento(), tarefas);
 
