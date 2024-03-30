@@ -4,5 +4,5 @@ public enum SituacaoFuncionario {
 
 	ATIVO,
 	INATIVO,
-	LICENÇA;
+	EM_LICENÇA;
 }

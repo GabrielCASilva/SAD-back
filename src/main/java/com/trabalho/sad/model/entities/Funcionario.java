@@ -193,7 +193,6 @@ public class Funcionario implements Serializable {
 		}
 	}
 
-
 	public void setDataNascimento(LocalDate dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
@@ -245,4 +244,29 @@ public class Funcionario implements Serializable {
 	public void setSenhaHash(String senhaHash) {
 		this.senhaHash = senhaHash;
 	}
+
+	public List<Meta> getMetas() {
+		return metas;
+	}
+
+	public void setMetas(List<Meta> metas) {
+		this.metas = metas;
+	}
+
+	public List<Tarefa> getTarefasSupervisor() {
+		return tarefasSupervisor;
+	}
+
+	public void setTarefasSupervisor(List<Tarefa> tarefasSupervisor) {
+		this.tarefasSupervisor = tarefasSupervisor;
+	}
+
+	public List<Tarefa> getTarefasServidor() {
+		return tarefasServidor;
+	}
+
+	public void setTarefasServidor(List<Tarefa> tarefasServidor) {
+		this.tarefasServidor = tarefasServidor;
+	}
+
 }
