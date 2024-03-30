@@ -8,8 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.trabalho.sad.model.entities.Relatorio;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -17,23 +15,11 @@ import java.io.IOException;
 @Controller
 public class RelatorioController {
 
-    @GetMapping("/gerarRelatorio")
-    public ResponseEntity<?> gerarRelatorio() {
-        try {
-            Relatorio relatorio = new Relatorio();
-            relatorio.gerarRelatorio();
-            relatorio.substituirVariaveis();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return ResponseEntity.ok().body(null);
-    }
-
     @GetMapping("/downloadRelatorio")
     @ResponseBody
     public ResponseEntity<InputStreamResource> downloadRelatorio() throws IOException {
 
-        File relatorio = new File("novo_relatorio.docx");
+        File relatorio = new File("relatorio_completo.docx");
 
         InputStreamResource resource = new InputStreamResource(new FileInputStream(relatorio));
 

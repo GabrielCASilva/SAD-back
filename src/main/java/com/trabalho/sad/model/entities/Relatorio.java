@@ -49,33 +49,3 @@ public class Relatorio {
         System.out.println("Documento modificado salvo com sucesso!");
     }
 }
-
-// public static void main(String[] args) {
-//     try {
-//         // Carregue o documento Word modelo
-//         WordprocessingMLPackage wordMLPackage = WordprocessingMLPackage.load(new File("caminho/do/seu/modelo.docx"));
-//         MainDocumentPart mainDocumentPart = wordMLPackage.getMainDocumentPart();
-
-//         // Mapeie as variáveis para os valores desejados
-//         Map<String, String> variables = new HashMap<>();
-//         variables.put("nome", "João");
-//         variables.put("idade", "30");
-//         // Adicione outras variáveis conforme necessário
-
-//         // Substitua as variáveis no documento
-//         String docxContent = mainDocumentPart.getXML();
-//         for (Map.Entry<String, String> entry : variables.entrySet()) {
-//             String variable = "${" + entry.getKey() + "}";
-//             String value = entry.getValue();
-//             docxContent = docxContent.replace(variable, value);
-//         }
-//         mainDocumentPart.setContents(docxContent);
-
-//         // Salve o documento modificado
-//         wordMLPackage.save(new File("caminho/do/seu/novo_documento.docx"));
-        
-//         System.out.println("Documento modificado salvo com sucesso!");
-//     } catch (Docx4JException e) {
-//         e.printStackTrace();
-//     }
-// }

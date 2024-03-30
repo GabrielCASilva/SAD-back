@@ -114,6 +114,8 @@ public class TarefaController {
 
 		AvaliacaoSuperior avaliacao = new AvaliacaoSuperior(supervisor, tarefas);
 		avaliacao.calcularAvaliacao();
+		avaliacao.gerarRelatorio(supervisor, dataInicio, dataFim);
+
 		AvaliacaoDTO avaliacaoDTO = new AvaliacaoDTO(avaliacao.getIndiceProdutividade(), 
 			avaliacao.getIndiceAgilidade(), avaliacao.getIndiceEficacia(), avaliacao.getIndiceComprometimento(), tarefas);
 
@@ -130,6 +132,8 @@ public class TarefaController {
 
 		ProgressoMeta progresso = new ProgressoMeta(meta, tarefas);
 		progresso.calcularAvaliacao();
+		progresso.gerarRelatorio(meta, dataInicio, dataFim);
+		
 		AvaliacaoDTO avaliacaoDTO = new AvaliacaoDTO(progresso.getIndiceProdutividade(), 
 			progresso.getIndiceAgilidade(), progresso.getIndiceEficacia(), tarefas);
 			

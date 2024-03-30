@@ -200,4 +200,10 @@ public class AvaliacaoExecutor implements Avaliacao{
 		return indiceComprometimento;
 	}
 
+	@Override
+	public void gerarRelatorio(Meta meta, LocalDate dataInicio, LocalDate dataFim) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'gerarRelatorio'");
+	}
+
 }
