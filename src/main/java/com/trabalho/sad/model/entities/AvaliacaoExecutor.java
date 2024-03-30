@@ -82,8 +82,11 @@ public class AvaliacaoExecutor implements Avaliacao{
 		
 		/* Percorrer lista de tarefas */
 		for(Tarefa tarefa : this.tarefasAvaliacao) {
-				/* Acumula diferença entre data de conclusão e data de criação, para cada tarefa */
-			diasAgilidade = diasAgilidade + ChronoUnit.DAYS.between(tarefa.getDataCriacao(), tarefa.getDataConclusao());
+				/* Verifica se tarefa foi concluída */
+			if(tarefa.getSituacao() == SituacaoServico.CONCLUÍDO) {
+					/* Acumula diferença entre data de conclusão e data de criação, para cada tarefa */
+				diasAgilidade = diasAgilidade + ChronoUnit.DAYS.between(tarefa.getDataCriacao(), tarefa.getDataConclusao());
+			}
 		}
 		
 			/* Agilidade = Resultado de diasAgilidade, por total de tarefas */
@@ -95,11 +98,14 @@ public class AvaliacaoExecutor implements Avaliacao{
 		double resultado = 0;
 		long diasEficacia = 0;
 		
-		/* Percorrer lista de tarefas */
+			/* Percorrer lista de tarefas */
 		for(Tarefa tarefa : this.tarefasAvaliacao) {
-				/* Acumula diferença entre data de conclusão prevista e data de conclusão efetiva, 
-				 * para cada tarefa */
-			diasEficacia = diasEficacia + ChronoUnit.DAYS.between(tarefa.getDataConclusao(), tarefa.getDataPrevistaConclusao());
+				/* Verifica se tarefa foi concluída */
+			if(tarefa.getSituacao() == SituacaoServico.CONCLUÍDO) {
+					/* Acumula diferença entre data de conclusão prevista e data de conclusão efetiva, 
+					 * para cada tarefa */
+				diasEficacia = diasEficacia + ChronoUnit.DAYS.between(tarefa.getDataConclusao(), tarefa.getDataPrevistaConclusao());
+			}
 		}
 		
 			/* Eficácia = Resultado de diasEficacia, por total de tarefas */
@@ -113,9 +119,11 @@ public class AvaliacaoExecutor implements Avaliacao{
 		
 		/* Percorrer lista de tarefas */
 		for(Tarefa tarefa : this.tarefasAvaliacao) {
-				/* Obtendo quantidade de tarefas em taxa de progresso maior ou igual a 50% */
-			if(tarefa.getTaxaProgresso() >= 0.50) {
-				tarefasEmComprometimento++;
+			if(tarefa.getSituacao() != SituacaoServico.ATIVO){
+					/* Obtendo quantidade de tarefas em taxa de progresso maior ou igual a 50% */
+				if(tarefa.getTaxaProgresso() >= 0.50) {
+					tarefasEmComprometimento++;
+				}
 			}
 		}
 		/* Produtividade = Quantidade de tarefas em taxa de progresso maior ou igual a 50%, 
